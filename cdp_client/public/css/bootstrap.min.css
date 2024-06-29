@@ -203,7 +203,7 @@ sup {
   top: -0.5em;
 }
 a {
-  color: #eb1616;
+  color: #fffe00;
   text-decoration: none;
 }
 a:hover {
@@ -2423,11 +2423,13 @@ textarea.form-control.is-valid {
   z-index: 3;
 }
 .invalid-feedback {
+  
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 0.875em;
-  color: #dc3545;
+  font-weight: bolder;
+  font-size: 0.975em;
+  color: #f90000;
 }
 .invalid-tooltip {
   position: absolute;
@@ -10481,3 +10483,6 @@ textarea.forms-control-lg {
   height: 1.5em;
   border-radius: 0.25rem;
 }
+
+
+

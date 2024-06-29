@@ -3,7 +3,7 @@ import React from 'react'
 function ChooseUs() {
   return (
     <>
-    <div class="why-choose-section" style={{backgroundColor:"#FFE3E1"}}>
+    <div class="why-choose-section" id="ourmission" style={{backgroundColor:"#FFE3E1"}}>
 			<div class="container">
 				<div class="row justify-content-between">
 					<div class="col-lg-6">

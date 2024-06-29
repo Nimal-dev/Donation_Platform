@@ -92,7 +92,7 @@ function Sidebar() {
 
               <NavLink
                 exact
-                to="/HelpRequests"
+                to="/"
                 className="nav-item nav-link"
                 activeClassName="active"
               >

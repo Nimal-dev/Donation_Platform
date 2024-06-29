@@ -1,9 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import SigninPage from "./components/SignIn";
-import Signup from "./components/SignUp";
-import AddState from "./components/Forms/Admin/AddState";
-import EditState from "./components/Forms/Admin/EditState";
+import SigninPage from "./components/Auth/SignIn";
+import Signup from "./components/Auth/SignUp";
 import AdminHome from "./components/HomePage/adminHome";
 import VolunteerHome from "./components/HomePage/deliveryHome";
 import UserHome from "./components/HomePage/userHome";
@@ -13,6 +11,7 @@ import FullDonationsSection from "./components/LandingPageComponents/FullDonatio
 import MyDonationsPage from "./components/LandingPageComponents/MyDonationsPage";
 import AddDonation from "./components/Forms/AddDonation";
 import RecipientHome from "./components/HomePage/RecipientHome";
+import RecipientSignUp from "./components/Auth/RecipientSignUp";
 
 function App() {
   return (
@@ -24,6 +23,8 @@ function App() {
 
       <Route path="/" element={<LandingPage/>}/>
       <Route path="/SignIn" element={<SigninPage/>}/>
+      <Route path="/RecipientSignup" element={<RecipientSignUp/>}/>
+      <Route path="/AgentSignup" element={<SigninPage/>}/>
       <Route path="/Signup" element={<Signup/>}/>
 
 {/* -----------------Auth Route End------------------------ */}

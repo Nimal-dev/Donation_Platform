@@ -40,6 +40,9 @@ function LandNavbar() {
               <li className={`nav-item ${currentPath === '/Donations' ? 'active' : ''}`}>
                 <a className="nav-link" href="/Donations">Donations</a>
               </li>
+              <li>
+                <a className="nav-link" href="#ourmission">Our Mission</a>
+              </li>
               
               <li className={`nav-item ${currentPath === '/MyDonations' ? 'active' : ''}`}>
 						<a class="nav-link" href="/MyDonations">My Donations</a>
