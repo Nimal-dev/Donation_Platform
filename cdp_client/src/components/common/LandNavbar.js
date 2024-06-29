@@ -40,18 +40,10 @@ function LandNavbar() {
               <li className={`nav-item ${currentPath === '/Donations' ? 'active' : ''}`}>
                 <a className="nav-link" href="/Donations">Donations</a>
               </li>
-              {/* <li className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`}>
-                <a className="nav-link" href="/Services">About Us</a>
-              </li> */}
+              
               <li className={`nav-item ${currentPath === '/MyDonations' ? 'active' : ''}`}>
 						<a class="nav-link" href="/MyDonations">My Donations</a>
               </li>
-              {/* <li className={`nav-item ${currentPath === '/Cart' ? 'active' : ''}`}>
-						<a class="nav-link" href="/Cart"><img src="img/cart.svg"/><strong> Cart</strong></a>
-              </li> */}
-              {/* <li className={`nav-item ${currentPath === '/about' ? 'active' : ''}`}>
-                <a className="nav-link" href="/about">About us</a>
-              </li> */}
             </ul>
             {isLoggedIn ? (
               <button className="btn btn-secondarys" onClick={handleLogout}><b>Log Out</b></button>

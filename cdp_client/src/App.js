@@ -5,7 +5,6 @@ import Signup from "./components/SignUp";
 import AddState from "./components/Forms/Admin/AddState";
 import EditState from "./components/Forms/Admin/EditState";
 import AdminHome from "./components/HomePage/adminHome";
-import StateHome from "./components/HomePage/stateHome";
 import VolunteerHome from "./components/HomePage/deliveryHome";
 import UserHome from "./components/HomePage/userHome";
 import AddDonationCategory from "./components/Forms/Admin/AddDonationCategory";
@@ -13,6 +12,7 @@ import LandingPage from "./components/HomePage/LandingPage";
 import FullDonationsSection from "./components/LandingPageComponents/FullDonationsSection";
 import MyDonationsPage from "./components/LandingPageComponents/MyDonationsPage";
 import AddDonation from "./components/Forms/AddDonation";
+import RecipientHome from "./components/HomePage/RecipientHome";
 
 function App() {
   return (
@@ -28,25 +28,18 @@ function App() {
 
 {/* -----------------Auth Route End------------------------ */}
 
-      <Route path="/UserHome" element={<UserHome/>}/>
-
-
-      <Route path="/AddState" element={<AddState/>}/>
-      <Route path="/EditState" element={<EditState/>}/>
-
 
 {/* -------------------------------------Home Page Routes----------------------------- */}
 
       <Route path="/AdminHome" element={<AdminHome/>}/>
-      <Route path="/DonorHome" element={<StateHome/>}/>
       <Route path="/VolunteerHome" element={<VolunteerHome/>}/>
       <Route path="/UserHome" element={<UserHome/>}/>
+      <Route path="/RecipientHome" element={<RecipientHome/>}/>
 
-{/* -------------------------------------Home Page Routes----------------------------- */}
+{/* -------------------------------------Admin Page Routes----------------------------- */}
 
     
       <Route path="/DonationCategories" element={<AddDonationCategory/>} />
-
       <Route path="/Donations" element={<FullDonationsSection/>} />
       <Route path="/MyDonations" element={<MyDonationsPage/>} />
       <Route path="/AddDonation" element={<AddDonation/>} />
