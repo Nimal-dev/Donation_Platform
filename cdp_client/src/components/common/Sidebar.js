@@ -108,11 +108,20 @@ function Sidebar() {
               </NavLink>
               <NavLink
                 exact
-                to="/AddDonation"
+                to="/Donation"
                 className="nav-item nav-link"
                 activeClassName="active"
               >
-                <i className="fa fa-credit-card me-2"></i>Add Donation
+                <i className="fa fa-credit-card me-2"></i>Donations
+              </NavLink>
+
+              <NavLink
+                exact
+                to="/Agents"
+                className="nav-item nav-link"
+                activeClassName="active"
+              >
+                <i className="fa fa-truck me-2"></i>Agents
               </NavLink>
 
               {/* <NavLink

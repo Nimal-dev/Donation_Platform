@@ -6,7 +6,7 @@ const authController = require('../Controllers/authController');
 
 //--------------------SIGNUP ROUTE---------------------- //
 router.post('/signup', authController.signup);
-router.post('/volunteerSignup', authController.volunteerSignup);
+router.post('/agentSignup', authController.agentSignup);
 
 //--------------------SIGNIN ROUTE---------------------- //
 router.post('/signin', authController.signin);

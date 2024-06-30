@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Popup from '../common/PopUp';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SigninPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
-  const [popupMessage, setPopupMessage] = useState('');
-  const [popupType, setPopupType] = useState(''); // Add popupType to manage success or error type
   const navigate = useNavigate();
-  const [redirectPath, setRedirectPath] = useState(''); // Add redirectPath to store the path for redirection
 
   const validateForm = () => {
     const newErrors = {};
@@ -48,30 +45,30 @@ function SigninPage() {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      res.json().then((data) => {
-        console.log('data', data);
+    })
+      .then((res) => res.json())
+      .then((data) => {
         if (data !== 'Invalid password' && data !== 'Invalid email' && data !== 'User not found') {
           localStorage.setItem("userdata", JSON.stringify(data));
           const userType = data.authid.usertype;
 
           let path;
-          if (userType === 0) {  // Admin
+          if (userType === 0) {
             path = '/AdminHome';
-          } else if (userType === 1) {  // Delivery Boy
+          } else if (userType === 1) {
             path = '/DeliveryHome';
-          } else if (userType === 2) { // Recipient
+          } else if (userType === 2) {
             path = '/RecipientHome';
-          } else if (userType === 3) {  // Donor 
+          } else if (userType === 3) {
             path = '/';
           } else {
             console.log("Unknown user type");
           }
-          setRedirectPath(path);
-          setPopupType('success');
-          setPopupMessage('Login Successful!');
+
+          toast.success('Login Successful!', {
+            onClose: () => navigate(path),
+          });
         } else {
-          // Set the appropriate error messages based on the server response
           const newErrors = {};
           if (data === 'Invalid password') {
             newErrors.password = 'Invalid password';
@@ -79,21 +76,14 @@ function SigninPage() {
             newErrors.email = 'Invalid email or user not found';
           }
           setErrors(newErrors);
-          setPopupType('error');
-          setPopupMessage('Login Failed!');
+          toast.error('Login Failed!');
           console.log("Login failed: ", data);
         }
+      })
+      .catch((error) => {
+        console.error("Error during login:", error);
+        toast.error('An error occurred. Please try again.');
       });
-    }).catch((error) => {
-      console.error("Error during login:", error);
-    });
-  };
-
-  const closePopup = () => {
-    setPopupMessage('');
-    if (popupType === 'success' && redirectPath) {
-      navigate(redirectPath);
-    }
   };
 
   return (
@@ -131,13 +121,10 @@ function SigninPage() {
                 {errors.password && <div className="invalid-feedback">{errors.password}</div>}
               </div>
 
-              {/* -----------Custom Button Start ------------- */}
               <button type="button" className="glow-on-hover w-100 mb-4" onClick={handleLogin}>
                 Sign In <i className="fa fa-arrow-right" aria-hidden="true"></i>
               </button>
-              {/* --------------------Custom Button End ------------------ */}
-              
-              {/* <button type="button" className="btn btn-primary py-3 w-100 mb-4" onClick={handleLogin}>Sign In</button> */}
+
               <p className="text-center mb-0">New User! <a href="/Signup">Sign Up</a></p><br />
               <p className="text-center mb-0">Become a Recipient <a href="/RecipientSignup">Sign Up</a></p><br />
               <p className="text-center mb-0">Become a <a href="/AgentSignup">Delivery Agent</a>!</p>
@@ -145,7 +132,7 @@ function SigninPage() {
           </div>
         </div>
       </div>
-      {popupMessage && <Popup message={popupMessage} type={popupType} onClose={closePopup} />}
+      <ToastContainer />
     </div>
   );
 }

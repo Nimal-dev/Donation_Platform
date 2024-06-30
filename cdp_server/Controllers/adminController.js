@@ -1,6 +1,6 @@
 const authmodels = require('../Models/authModel');
 const donormodels = require('../Models/donorModel');
-const volunteermodels = require('../Models/volunteerModel');
+const agentModels = require('../Models/agentModel');
 const recipientmodels = require('../Models/userModel');
 const categorymodels = require('../Models/categoryModel');
 const DonationModels = require('../Models/DonationModel')
@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 
 const authModel = authmodels.auth;
 const donorModel = donormodels.donor;
-const volunteerModel = volunteermodels.volunteer;
+const agentModel = agentModels.agent;
 const recipientmodel = recipientmodels.user;
 const categorymodel = categorymodels.category;
 
@@ -130,9 +130,9 @@ exports.deleteDonor = async (req, res) => {
     }
 };
 
-// ------------------------------------------------------Volunteer Controller----------------------------------------------//
+// ------------------------------------------------------Agent Controller----------------------------------------------//
 
-exports.AddVolunteer = async (req, res) =>{
+exports.AddAgent = async (req, res) =>{
     try{
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const loginparam = {
@@ -142,14 +142,14 @@ exports.AddVolunteer = async (req, res) =>{
         };
         const auth = await authModel.create(loginparam);
 
-        const volunteerparam = {    
-            volunteername: req.body.volunteername,
+        const agentparam = {    
+            agentname: req.body.agentname,
             contact: req.body.contact,
             location: req.body.location,
             address: req.body.address,
             authid: auth._id
         };
-        await volunteerModel.create(volunteerparam);
+        await agentModel.create(agentparam);
         res.json('success');
     } catch (error) {
         console.error('Error:', error);
@@ -158,12 +158,12 @@ exports.AddVolunteer = async (req, res) =>{
 };
 
 
-exports.viewvolunteer = async (req, res) => {
+exports.viewAgent = async (req, res) => {
     try {
-        const volunteers = await volunteerModel.find().populate('authid');
-        res.json(volunteers);
+        const agents = await agentModel.find().populate('authid');
+        res.json(agents);
     } catch (error) {
-        console.error('Error fetching volunteers:', error);
+        console.error('Error fetching agents:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
@@ -171,36 +171,36 @@ exports.viewvolunteer = async (req, res) => {
 
 
 
-exports.deleteVolunteer = async (req, res) => {
+exports.deleteAgents = async (req, res) => {
     try {
-        const volunteerId = req.body.id;
-        const volunteer = await volunteerModel.findById(volunteerId);
+        const agentId = req.body.id;
+        const agent = await agentModel.findById(agentId);
 
-        if (!volunteer) {
-            return res.status(404).json({ error: 'Volunteer not found' });
+        if (!agent) {
+            return res.status(404).json({ error: 'Agent not found' });
         }
 
         // Delete associated auth details
-        await authModel.findByIdAndDelete(volunteer.authid);
+        await authModel.findByIdAndDelete(agent.authid);
 
         // Delete the volunteer
-        await volunteerModel.findByIdAndDelete(volunteerId);
+        await agentModel.findByIdAndDelete(agentId);
 
-        res.json({ message: 'Volunteer and associated auth details deleted successfully' });
+        res.json({ message: 'Agent and associated auth details deleted successfully' });
     } catch (error) {
-        console.error("Error in deleting Volunteer:", error);
-        res.status(500).json({ error: "An error occurred while deleting the Volunteer" });
+        console.error("Error in deleting Agent:", error);
+        res.status(500).json({ error: "An error occurred while deleting the Agent" });
     }
 };
-exports.editAndUpdateVolunteer = async (req, res) => {
+exports.editAndUpdateAgent = async (req, res) => {
     try {
-        const volunteerDetails = {
-            volunteername: req.body.volunteername,
+        const agentDetails = {
+            agentname: req.body.agentname,
             contact: req.body.contact,
             location: req.body.location,
             address: req.body.address,
         };
-        await volunteerModel.findByIdAndUpdate(req.body.id, volunteerDetails);
+        await agentModel.findByIdAndUpdate(req.body.id, agentDetails);
 
         const loginDetails = {
             email: req.body.email,
@@ -210,28 +210,29 @@ exports.editAndUpdateVolunteer = async (req, res) => {
 
         res.json("updated");
     } catch (error) {
-        console.error("Error in updating volunteer:", error);
+        console.error("Error in updating agent:", error);
         res.status(500).json({ error: "An error occurred while updating the volunteer" });
     }
 };
 
-exports.UpdateVolunteer = async (req, res) => {
+exports.UpdateAgent = async (req, res) => {
     try {
-        const volunteerDetails = await volunteerModel.findById(req.body.id).populate('authid');
-        console.log(volunteerDetails);
-        if (!volunteerDetails) {
-            return res.status(404).json({ error: 'Volunteer not found' });
+        const agentDetails = await agentModel.findById(req.body.id).populate('authid');
+        console.log(agentDetails);
+        if (!agentDetails) {
+            return res.status(404).json({ error: 'Agent not found' });
         }
 
         res.json({
-            volunteerDetails,
-            authDetails: volunteerDetails.authid
+            agentDetails,
+            authDetails: agentDetails.authid
         });
     } catch (error) {
-        console.error("Error in fetching volunteer details:", error);
+        console.error("Error in fetching agent details:", error);
         res.status(500).json({ error: "An error occurred while fetching the donor details" });
     }
 };
+// -----------------------------------------------------------------------------//
 
 exports.viewRecipient = async (req, res) => {
     try {
@@ -351,5 +352,22 @@ exports.ViewDonations = async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
+  exports.deleteDonation = async (req, res) => {
+    try {
+        const donationId = req.body.id;
+        const donation = await DonationModel.findById(donationId);
 
+        if (!donation) {
+            return res.status(404).json({ error: 'donation not found' });
+        }
+
+        // Delete the volunteer
+        await DonationModel.findByIdAndDelete(donationId);
+
+        res.json({ message: 'Donation deleted successfully' });
+    } catch (error) {
+        console.error("Error in deleting Donation:", error);
+        res.status(500).json({ error: "An error occurred while deleting the Donation" });
+    }
+};
 

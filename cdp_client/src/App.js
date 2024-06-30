@@ -9,12 +9,15 @@ import UserHome from "./components/HomePage/userHome";
 import LandingPage from "./components/HomePage/LandingPage";
 import FullDonationsSection from "./components/LandingPageComponents/FullDonationsSection";
 import MyDonationsPage from "./components/LandingPageComponents/MyDonationsPage";
-import AddDonation from "./components/Forms/Admin/AddDonation";
 import RecipientHome from "./components/HomePage/RecipientHome";
 import RecipientSignUp from "./components/Auth/RecipientSignUp";
-import DonationCategories from "./components/Tables/DonationCategories";
+import DonationCategories from "./components/Tables/Admin/DonationCategories";
 import AddDonor from "./components/Forms/Admin/AddDonor";
 import EditDonor from "./components/Forms/Admin/EditDonor";
+import DonationPage from "./components/Tables/Admin/DonationPage";
+import Agents from "./components/Tables/Admin/Agents";
+import AgentSignUp from "./components/Auth/AgentSignUp";
+import EditAgent from "./components/Forms/Admin/EditAgent";
 
 function App() {
   return (
@@ -27,7 +30,7 @@ function App() {
       <Route path="/" element={<LandingPage/>}/>
       <Route path="/SignIn" element={<SigninPage/>}/>
       <Route path="/RecipientSignup" element={<RecipientSignUp/>}/>
-      <Route path="/AgentSignup" element={<SigninPage/>}/>
+      <Route path="/AgentSignup" element={<AgentSignUp/>}/>
       <Route path="/Signup" element={<Signup/>}/>
 
 {/* -----------------Auth Route End------------------------ */}
@@ -46,9 +49,11 @@ function App() {
       <Route path="/DonationCategories" element={<DonationCategories/>} />
       <Route path="/Donations" element={<FullDonationsSection/>} />
       <Route path="/MyDonations" element={<MyDonationsPage/>} />
-      <Route path="/AddDonation" element={<AddDonation/>} />
+      <Route path="/Donation" element={<DonationPage/>} />
       <Route path="/AddDonor" element={<AddDonor/>} />
       <Route path="/EditDonor" element={<EditDonor/>} />
+      <Route path="/EditAgent" element={<EditAgent/>} />
+      <Route path="/Agents" element={<Agents/>} />
 
     </Routes>
     </BrowserRouter>

@@ -1,11 +1,11 @@
 const authmodels = require('../Models/authModel');
 const usermodels = require('../Models/userModel');
 const donormodels = require('../Models/donorModel');
-const volunteerModels = require('../Models/volunteerModel');
+const agentModels = require('../Models/agentModel');
 const userModel = usermodels.user;
 const authModel = authmodels.auth;
 const donorModel = donormodels.donor;
-const volunteerModel = volunteerModels.volunteer;
+const agentModel = agentModels.agent;
 const bcrypt = require('bcrypt');
 
 // -------------------------------Authentication ------------------------------//
@@ -36,8 +36,8 @@ exports.signup = async (req, res) => {
     }
 }; 
 
-// ----------------------------Volunteer Sign Up----------------------------------//
-exports.volunteerSignup = async (req, res) => {
+// ----------------------------Agent Sign Up----------------------------------//
+exports.agentSignup = async (req, res) => {
     try {
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -48,14 +48,14 @@ exports.volunteerSignup = async (req, res) => {
         };
         const auth = await authModel.create(authparam);
 
-const volunteerparam = {    
-    volunteername: req.body.volunteername,
+const agentparam = {    
+    agentname: req.body.agentname,
     contact: req.body.contact,
     location: req.body.location,
     address: req.body.address,
     authid: auth._id
 };
-        await volunteerModel.create(volunteerparam);
+        await agentModel.create(agentparam);
         res.json('success');
     } catch (error) {
         console.error("Error Occurred:", error);
@@ -78,7 +78,7 @@ exports.signin = async (req, res) => {
                 if (authenticate.usertype === 1) { // Donor user
                     user = await donorModel.findOne({ authid: authenticate._id }).populate('authid');
                 } else if(authenticate.usertype === 2){
-                    user = await volunteerModel.findOne({ authid: authenticate._id }).populate('authid');
+                    user = await agentModel.findOne({ authid: authenticate._id }).populate('authid');
                 }
                 else {
                      // Admin user
