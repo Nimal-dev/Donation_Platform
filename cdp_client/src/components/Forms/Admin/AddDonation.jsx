@@ -9,13 +9,7 @@ function AddDonation() {
     const [image, setImage] = useState(null);
     const [message, setMessage] = useState("");
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
-  
-    // const getSellerId = () => {
-    //   const userdata = JSON.parse(localStorage.getItem("userdata"));
-    //   console.log(userdata._id);
-    //   return userdata ? userdata._id : null;
-    // };
+      const navigate = useNavigate();
   
     const validateForm = () => {
       let formErrors = {};
@@ -41,12 +35,6 @@ function AddDonation() {
       e.preventDefault();
   
       if (!validateForm()) return;
-  
-      // const sellerId = getSellerId();
-      // if (!sellerId) {
-      //   setMessage("Failed to get seller information. Please log in again.");
-      //   return;
-      // }
   
       const formData = new FormData();
       formData.append("donationName", donationName);

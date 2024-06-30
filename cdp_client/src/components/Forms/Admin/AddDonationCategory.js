@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../common/Sidebar";
 
 function AddDonationCategory() {
   const [categoryname, setCategoryName] = useState("");
@@ -35,21 +34,16 @@ function AddDonationCategory() {
         setMessage("Failed to add Category. Please try again.");
       });
     setTimeout(() => {
-      navigate('/AdminHome');
+      window.location.reload();
     }, 2000);
   };
   return (
     <>
-    {/* <div className="content">
-        <div className="container-fluid"> */}
-          <div
-            className="row h-100 align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
-          >
-            <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
-              <div className="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+    
+            <div className="col-12 col-sm-8 col-md-12 col-lg-12 col-xl-12">
+              <div className="bg-secondary rounded p-3 p-sm-5 my-4 mx-4">
                 <div className="d-flex align-items-center justify-content-center mb-3">
-                  <h3>Add Category</h3>
+                  <h3>ADD CATEGORY</h3>
                 </div>
                 {/*------------------------- ALERT MESSAGE ---------------------------------*/}
                 {message && (
@@ -72,39 +66,7 @@ function AddDonationCategory() {
                     <label htmlFor="categoryNameInput">Category Name</label>
                   </div>
                   
-                  {/*------------------------- Package Services Input ---------------------------------*/}
-                  {/* <div className="form-floating mb-3">
-                    <select
-                      className="form-select"
-                      id="floatingSelect"
-                      aria-label="Floating label select example"
-                      onChange={handleServiceChange}
-                    >
-                      <option value="" disabled selected>Select Services</option>
-                      {allServices.map((service) => (
-                        <option key={service._id} value={service.servicename}>
-                          {service.servicename}
-                        </option>
-                      ))}
-                    </select>
-                    <label htmlFor="floatingSelect">Select Services</label>
-                  </div> */}
                   
-                  {/*------------------------- Selected Services ---------------------------------*/}
-                  {/* <div className="mb-3">
-                    {services.map((service, index) => (
-                      <div key={index} className="d-flex align-items-center mb-2">
-                        <span className="me-2">{service}</span>
-                        <button
-                          type="button"
-                          className="btn btn-danger btn-sm"
-                          onClick={() => removeService(service)}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    ))}
-                  </div> */}
 
                  
                   
@@ -120,9 +82,7 @@ function AddDonationCategory() {
                 </form>
               </div>
             </div>
-          </div>
-        {/* </div>
-      </div> */}
+          
 
     </>
   )

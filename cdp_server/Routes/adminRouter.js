@@ -17,8 +17,11 @@ router.get('/viewvolunteer', adminController.viewvolunteer);
 router.get('/viewRecipient', adminController.viewRecipient);
 router.post('/AddVolunteer', adminController.AddVolunteer);
 router.post('/deleteVolunteer', adminController.deleteVolunteer);
+
+
 router.post('/AddCategory', adminController.AddCategory);
 router.get('/viewCategories', adminController.viewCategories);
+router.post('/deleteCategories', adminController.deleteCategories);
 
 
 router.post('/AddDonation', adminController.AddDonation);

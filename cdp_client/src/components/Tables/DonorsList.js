@@ -41,7 +41,7 @@ function DonorsList() {
       <div className="bg-secondary rounded h-100 p-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h6 className="mb-0">DONORS LIST</h6>
-          <Link className="btn btn-primary" to="/AddState">
+          <Link className="btn btn-primary" to="/AddDonor">
             ADD DONORS
           </Link>
         </div>

@@ -38,7 +38,7 @@ function DeliveryboyList() {
   };
 
   return (
-    <div className="col-sm-12 col-xl-6">
+    <div className="col-sm-12 col-xl-12">
       <div className="bg-secondary rounded h-100 p-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h6 className="mb-4">DELIVERY AGENTS</h6>

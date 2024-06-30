@@ -1,22 +1,108 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AddDonationCategory from '../Forms/Admin/AddDonationCategory'
 import Sidebar from '../common/Sidebar'
 import Navbar from '../common/Navbar'
 
 function DonationCategories() {
-  return (
-    <>
-    <Sidebar/>
-    <div class="content">
-      <Navbar/>
-      <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-         <AddDonationCategory/>
-        </div>
-      </div>
-    </div>
-  </>
-  )
+    const [categories, setCategories] = useState([]);
+    const [refresh, setRefresh] = useState(0);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch("http://localhost:4000/admin/viewCategories")
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result, "aserdtfgh");
+                setCategories(result);
+            })
+            .catch((error) => {
+                console.error("Error fetching Categories:", error);
+            });
+    }, [refresh]);
+
+    const deleteCategories = (id) => {
+        fetch("http://localhost:4000/admin/deleteCategories", {
+            method: "post",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id }),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result);
+                setRefresh((prev) => prev + 1); // Trigger a refresh
+            })
+            .catch((error) => {
+                console.error("Error deleting state:", error);
+            });
+    };
+    return (
+        <>
+            <Sidebar />
+            <div class="content">
+                <Navbar />
+                <div class="container-fluid pt-4 px-4">
+                    <div class="row g-4">
+                        <AddDonationCategory />
+                        <div className="col-sm-12 col-xl-12">
+                            <div className="bg-secondary rounded h-100 p-4">
+                                <div className="d-flex justify-content-between align-items-center mb-4">
+                                    <h6 className="mb-4">CATEGORIES</h6>
+                                    {/* <Link className="btn btn-primary" to="/DonationCategories">
+          ADD CATEGORY
+        </Link> */}
+                                </div>
+                                <table className="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Category Name</th>
+                                            <th scope="col">Actions</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {categories.length === 0 ? (
+                                            <tr>
+                                                <td colSpan="3" className="text-center">
+                                                    No Categories added.
+                                                </td>
+                                            </tr>
+                                        ) : (
+                                            categories.map((categories, index) => (
+                                                <tr key={index}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{categories.categoryname}</td>
+                                                    {/* <td>{volunteer.authid.email}</td>
+                <td>{volunteer.contact}</td> */}
+                                                    <td>
+                                                        {/* <Link to="/EditVolunteer" state={{ id: volunteer._id }}>
+                    <button className="btn btn-success" style={{ padding: "5px 20px" }}>
+                      Edit
+                    </button>
+                  </Link> */}
+                                                        <button
+                                                            className="btn btn-danger ms-1" style={{ padding: "5px 20px" }}
+                                                            onClick={() => deleteCategories(categories._id)}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
 }
 
 export default DonationCategories

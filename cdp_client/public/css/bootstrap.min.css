@@ -3267,7 +3267,9 @@ fieldset:disabled .btn {
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 }
 .dropdown-menu[data-bs-popper] {

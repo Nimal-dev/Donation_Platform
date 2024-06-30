@@ -168,6 +168,9 @@ exports.viewvolunteer = async (req, res) => {
     }
 };
 
+
+
+
 exports.deleteVolunteer = async (req, res) => {
     try {
         const volunteerId = req.body.id;
@@ -265,6 +268,24 @@ exports.AddCategory = async (req, res) => {
     } catch (error) {
         console.error("Error fetching packages:", error);
         res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+exports.deleteCategories = async (req, res) => {
+    try {
+        const categoryId = req.body.id;
+        const category = await categorymodel.findById(categoryId);
+
+        if (!category) {
+            return res.status(404).json({ error: 'Category not found' });
+        }
+
+        // Delete the volunteer
+        await categorymodel.findByIdAndDelete(categoryId);
+
+        res.json({ message: 'Category deleted successfully' });
+    } catch (error) {
+        console.error("Error in deleting Category:", error);
+        res.status(500).json({ error: "An error occurred while deleting the Category" });
     }
 };
 

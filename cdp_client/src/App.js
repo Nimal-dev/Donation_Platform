@@ -13,6 +13,7 @@ import AddDonation from "./components/Forms/Admin/AddDonation";
 import RecipientHome from "./components/HomePage/RecipientHome";
 import RecipientSignUp from "./components/Auth/RecipientSignUp";
 import DonationCategories from "./components/Tables/DonationCategories";
+import AddDonor from "./components/Forms/Admin/AddDonor";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
       <Route path="/Donations" element={<FullDonationsSection/>} />
       <Route path="/MyDonations" element={<MyDonationsPage/>} />
       <Route path="/AddDonation" element={<AddDonation/>} />
+      <Route path="/AddDonor" element={<AddDonor/>} />
 
     </Routes>
     </BrowserRouter>

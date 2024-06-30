@@ -90,14 +90,14 @@ function Sidebar() {
                 <i className="fa fa-tachometer-alt me-2"></i>Dashboard
               </NavLink>
 
-              <NavLink
+              {/* <NavLink
                 exact
                 to="/AdminHome"
                 className="nav-item nav-link"
                 activeClassName="active"
               >
                 <i className="fa fa-bell me-2"></i>Donation Requ.
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 exact
                 to="/DonationCategories"
