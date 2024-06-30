@@ -104,7 +104,7 @@ function Sidebar() {
                 className="nav-item nav-link"
                 activeClassName="active"
               >
-                <i className="fa fa-bell me-2"></i>Donation Cat.
+                <i className="fa fa-th-list me-2"></i>Donation Cat.
               </NavLink>
               <NavLink
                 exact
@@ -112,7 +112,7 @@ function Sidebar() {
                 className="nav-item nav-link"
                 activeClassName="active"
               >
-                <i className="fa fa-bell me-2"></i>Add Donation
+                <i className="fa fa-credit-card me-2"></i>Add Donation
               </NavLink>
 
               {/* <NavLink

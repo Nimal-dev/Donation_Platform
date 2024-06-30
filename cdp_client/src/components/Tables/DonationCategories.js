@@ -48,57 +48,56 @@ function DonationCategories() {
                     <div class="row g-4">
                         <AddDonationCategory />
                         <div className="col-sm-12 col-xl-12">
-                            <div className="bg-secondary rounded h-100 p-4">
-                                <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <h6 className="mb-4">CATEGORIES</h6>
-                                    {/* <Link className="btn btn-primary" to="/DonationCategories">
-          ADD CATEGORY
-        </Link> */}
-                                </div>
-                                <table className="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Category Name</th>
-                                            <th scope="col">Actions</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {categories.length === 0 ? (
-                                            <tr>
-                                                <td colSpan="3" className="text-center">
-                                                    No Categories added.
-                                                </td>
-                                            </tr>
-                                        ) : (
-                                            categories.map((categories, index) => (
-                                                <tr key={index}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{categories.categoryname}</td>
-                                                    {/* <td>{volunteer.authid.email}</td>
-                <td>{volunteer.contact}</td> */}
-                                                    <td>
-                                                        {/* <Link to="/EditVolunteer" state={{ id: volunteer._id }}>
-                    <button className="btn btn-success" style={{ padding: "5px 20px" }}>
-                      Edit
+      <div className="bg-secondary rounded h-100 p-4">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h6 className="mb-4">Categories</h6>
+          
+        </div>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">Category Image</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.length === 0 ? (
+              <tr>
+                <td colSpan="4" className="text-center">
+                  No Categories added.
+                </td>
+              </tr>
+            ) : (
+              categories.map((category, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{category.categoryname}</td>
+                  <td>
+                    <img
+                      src={`http://localhost:4000${category.image}`}
+                      alt={category.categoryname}
+                      style={{ width: "50px", height: "50px" }}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-danger ms-1"
+                      style={{ padding: "5px 20px" }}
+                      onClick={() => deleteCategories(category._id)}
+                    >
+                      Delete
                     </button>
-                  </Link> */}
-                                                        <button
-                                                            className="btn btn-danger ms-1" style={{ padding: "5px 20px" }}
-                                                            onClick={() => deleteCategories(categories._id)}
-                                                        >
-                                                            Delete
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        )}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
         </>

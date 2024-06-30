@@ -246,18 +246,34 @@ exports.viewRecipient = async (req, res) => {
 
 
 // ADD CATEGORY
-exports.AddCategory = async (req, res) => {
-    try {
-      const categoryparam = {
-        categoryname: req.body.categoryname,
-    
-      };
-      await categorymodel.create(categoryparam);
-      res.json("success");
-    } catch (error) {
-      console.error("Error:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
+exports.AddCategory = (req, res) => {
+    upload(req, res, async (err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error uploading file', details: err });
+      }
+  
+      try {
+        const { categoryName } = req.body;
+  
+        if (!req.file) {
+          return res.status(400).json({ error: 'Image is required' });
+        }
+  
+        // Constructing the image URL
+        const CatImage = `/uploads/${req.file.filename}`;
+  
+        const categoryParam = {
+          categoryname: categoryName,
+          image: CatImage,
+        };
+  
+        await categorymodel.create(categoryParam);
+        res.json({ message: 'Category added successfully' });
+      } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    });
   };
 
 
