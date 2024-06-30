@@ -3,7 +3,7 @@ import Sidebar from "../../common/Sidebar";
 import { useNavigate } from "react-router-dom";
 
 function AddDonor() {
-  const [statename, setStatename] = useState("");
+  const [donorname, setDonorName] = useState("");
   const [contact, setContact] = useState("");
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
@@ -12,10 +12,10 @@ function AddDonor() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate(); 
 
-  const saveState = (event) => {
+  const saveDonor = (event) => {
     event.preventDefault(); // Prevent default form submission behavior
     let params = {
-      statename: statename,
+      donorname: donorname,
       contact: contact,
       location: location,
       address: address,
@@ -37,7 +37,7 @@ function AddDonor() {
         // Show success message
         setMessage("Donor added successfully.");
         // Clear form fields after successful submission
-        setStatename("");
+        setDonorName("");
         setContact("");
         setLocation("");
         setAddress("");
@@ -81,12 +81,12 @@ function AddDonor() {
                     <input
                       type="text"
                       className="form-control"
-                      id="stateNameInput"
+                      id="donorNameInput"
                       placeholder="Kerala Disaster management"
-                      name="statename"
-                      onChange={(event) => setStatename(event.target.value)}
+                      name="donorName"
+                      onChange={(event) => setDonorName(event.target.value)}
                     />
-                    <label htmlFor="stateNameInput">Add Donor Name</label>
+                    <label htmlFor="donorNameInput">Add Donor Name</label>
                   </div>
                   {/*------------------------- Contact Input ---------------------------------*/}
                   <div className="form-floating mb-3">
@@ -158,7 +158,7 @@ function AddDonor() {
                   <button
                     type="button"
                     className="btn btn-primary py-3 w-100 mb-4"
-                    onClick={saveState}
+                    onClick={saveDonor}
                   >
                     <strong>CREATE</strong>
                     <i className="fa fa-plus"></i>

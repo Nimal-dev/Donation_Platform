@@ -4,10 +4,10 @@ const adminController = require('../Controllers/adminController');
 
 // Define your routes here
 router.post('/AddDonor', adminController.AddDonor);
-router.get('/viewstate', adminController.viewstate);
-router.post('/updateStateById', adminController.UpdateState);
-router.post('/editAndUpdateState', adminController.editAndUpdateState);
-router.post('/deleteState', adminController.deleteState);
+router.get('/viewdonor', adminController.viewdonor);
+router.post('/updateDonorById', adminController.UpdateDonor);
+router.post('/editAndUpdateDonor', adminController.editAndUpdateDonor);
+router.post('/deleteDonor', adminController.deleteDonor);
 
 
 

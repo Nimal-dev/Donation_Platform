@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function DonorsList() {
-  const [state, setState] = useState([]);
+  const [donor, setDonor] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:4000/admin/viewstate")
+    fetch("http://localhost:4000/admin/viewdonor")
       .then((res) => res.json())
       .then((result) => {
-        setState(result);
+        setDonor(result);
       })
       .catch((error) => {
-        console.error("Error fetching states:", error);
+        console.error("Error fetching donor:", error);
       });
   }, [refresh]);
 
-  const deleteState = (id) => {
-    fetch("http://localhost:4000/admin/deleteState", {
+  const deleteDonor = (id) => {
+    fetch("http://localhost:4000/admin/deleteDonor", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -32,7 +32,7 @@ function DonorsList() {
         setRefresh((prev) => prev + 1); // Trigger a refresh
       })
       .catch((error) => {
-        console.error("Error deleting state:", error);
+        console.error("Error deleting Donor:", error);
       });
   };
 
@@ -57,28 +57,28 @@ function DonorsList() {
             </tr>
           </thead>
           <tbody>
-            {state.length === 0 ? (
+            {donor.length === 0 ? (
               <tr>
                 <td colSpan="5" className="text-center">
                   No Donors are registered.
                 </td>
               </tr>
             ) : (
-              state.map((state, index) => (
+              donor.map((donor, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{state.statename}</td>
-                  <td>{state.contact}</td>
-                  <td>{state.authid.email}</td>
+                  <td>{donor.donorname}</td>
+                  <td>{donor.contact}</td>
+                  <td>{donor.authid.email}</td>
                   <td>
-                    <Link to="/EditState" state={{ id: state._id }}>
+                    <Link to="/EditDonor" state={{ id: donor._id }}>
                       <button className="btn btn-success" style={{ padding: "5px 20px" }}>
                         Edit
                       </button>
                     </Link>
                     <button
                       className="btn btn-danger ms-1" style={{ padding: "5px 20px" }}
-                      onClick={() => deleteState(state._id)}
+                      onClick={() => deleteDonor(donor._id)}
                     >
                       Delete
                     </button>

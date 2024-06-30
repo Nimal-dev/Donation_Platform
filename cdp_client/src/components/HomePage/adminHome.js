@@ -1,5 +1,5 @@
 import React from 'react'
-import Widgets from '../common/Widgets';
+// import Widgets from '../common/Widgets';
 import Sidebar from '../common/Sidebar';
 import Navbar from '../common/Navbar';
 import UsersList from '../Tables/UsersList';
@@ -13,7 +13,7 @@ function AdminHome() {
       <Sidebar />
       <div class="content">
         <Navbar />
-        <Widgets />
+        {/* <Widgets /> */}
         
         <div class="container-fluid pt-4 px-4">
           <div class="row g-4">

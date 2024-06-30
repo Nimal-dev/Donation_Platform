@@ -14,6 +14,7 @@ import RecipientHome from "./components/HomePage/RecipientHome";
 import RecipientSignUp from "./components/Auth/RecipientSignUp";
 import DonationCategories from "./components/Tables/DonationCategories";
 import AddDonor from "./components/Forms/Admin/AddDonor";
+import EditDonor from "./components/Forms/Admin/EditDonor";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
       <Route path="/MyDonations" element={<MyDonationsPage/>} />
       <Route path="/AddDonation" element={<AddDonation/>} />
       <Route path="/AddDonor" element={<AddDonor/>} />
+      <Route path="/EditDonor" element={<EditDonor/>} />
 
     </Routes>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 const authmodels = require('../Models/authModel');
-const statemodels = require('../Models/stateModel');
+const donormodels = require('../Models/donorModel');
 const volunteermodels = require('../Models/volunteerModel');
 const recipientmodels = require('../Models/userModel');
 const categorymodels = require('../Models/categoryModel');
@@ -7,7 +7,7 @@ const DonationModels = require('../Models/DonationModel')
 const bcrypt = require('bcrypt');
 
 const authModel = authmodels.auth;
-const stateModel = statemodels.state;
+const donorModel = donormodels.donor;
 const volunteerModel = volunteermodels.volunteer;
 const recipientmodel = recipientmodels.user;
 const categorymodel = categorymodels.category;
@@ -32,7 +32,7 @@ const upload = multer({ storage: storage }).single('image');
 
 
 
-// ------------------------------------------------------State Controller----------------------------------------------//
+// ------------------------------------------------------Donor Controller----------------------------------------------//
 exports.AddDonor = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -43,14 +43,14 @@ exports.AddDonor = async (req, res) => {
         };
         const auth = await authModel.create(loginparam);
 
-        const stateparam = {    
-            statename: req.body.statename,
+        const donorparam = {    
+            donorname: req.body.donorname,
             contact: req.body.contact,
             location: req.body.location,
             address: req.body.address,
             authid: auth._id
         };
-        await stateModel.create(stateparam);
+        await donorModel.create(donorparam);
         res.json('success');
     } catch (error) {
         console.error('Error:', error);
@@ -58,42 +58,42 @@ exports.AddDonor = async (req, res) => {
     }
 };
 
-exports.viewstate = async (req, res) => {
+exports.viewdonor = async (req, res) => {
     try {
-        const states = await stateModel.find().populate('authid');
-        res.json(states);
+        const donors = await donorModel.find().populate('authid');
+        res.json(donors);
     } catch (error) {
-        console.error('Error fetching states:', error);
+        console.error('Error fetching donor:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-exports.UpdateState = async (req, res) => {
+exports.UpdateDonor = async (req, res) => {
     try {
-        const stateDetails = await stateModel.findById(req.body.id).populate('authid');
-        if (!stateDetails) {
-            return res.status(404).json({ error: 'State not found' });
+        const donorDetails = await donorModel.findById(req.body.id).populate('authid');
+        if (!donorDetails) {
+            return res.status(404).json({ error: 'donor not found' });
         }
 
         res.json({
-            stateDetails,
-            authDetails: stateDetails.authid
+            donorDetails,
+            authDetails: donorDetails.authid
         });
     } catch (error) {
-        console.error("Error in fetching state details:", error);
-        res.status(500).json({ error: "An error occurred while fetching the state details" });
+        console.error("Error in fetching donor details:", error);
+        res.status(500).json({ error: "An error occurred while fetching the donor details" });
     }
 };
 
-exports.editAndUpdateState = async (req, res) => {
+exports.editAndUpdateDonor = async (req, res) => {
     try {
-        const stateDetails = {
-            statename: req.body.statename,
+        const donorDetails = {
+            donorname: req.body.donorname,
             contact: req.body.contact,
             location: req.body.location,
             address: req.body.address,
         };
-        await stateModel.findByIdAndUpdate(req.body.id, stateDetails);
+        await donorModel.findByIdAndUpdate(req.body.id, donorDetails);
 
         const loginDetails = {
             email: req.body.email,
@@ -103,30 +103,30 @@ exports.editAndUpdateState = async (req, res) => {
 
         res.json("updated");
     } catch (error) {
-        console.error("Error in updating state:", error);
-        res.status(500).json({ error: "An error occurred while updating the state" });
+        console.error("Error in updating donor:", error);
+        res.status(500).json({ error: "An error occurred while updating the donor" });
     }
 };
 
-exports.deleteState = async (req, res) => {
+exports.deleteDonor = async (req, res) => {
     try {
-        const stateId = req.body.id;
-        const state = await stateModel.findById(stateId);
+        const donorId = req.body.id;
+        const donor = await donorModel.findById(donorId);
 
-        if (!state) {
-            return res.status(404).json({ error: 'State not found' });
+        if (!donor) {
+            return res.status(404).json({ error: 'donor not found' });
         }
 
         // Delete associated auth details
-        await authModel.findByIdAndDelete(state.authid);
+        await authModel.findByIdAndDelete(donor.authid);
 
-        // Delete the state
-        await stateModel.findByIdAndDelete(stateId);
+        // Delete the donor
+        await donorModel.findByIdAndDelete(donorId);
 
-        res.json({ message: 'State and associated auth details deleted successfully' });
+        res.json({ message: 'Donor and associated auth details deleted successfully' });
     } catch (error) {
-        console.error("Error in deleting state:", error);
-        res.status(500).json({ error: "An error occurred while deleting the state" });
+        console.error("Error in deleting donor:", error);
+        res.status(500).json({ error: "An error occurred while deleting the donor" });
     }
 };
 
@@ -229,7 +229,7 @@ exports.UpdateVolunteer = async (req, res) => {
         });
     } catch (error) {
         console.error("Error in fetching volunteer details:", error);
-        res.status(500).json({ error: "An error occurred while fetching the state details" });
+        res.status(500).json({ error: "An error occurred while fetching the donor details" });
     }
 };
 

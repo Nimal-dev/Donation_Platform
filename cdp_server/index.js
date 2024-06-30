@@ -21,7 +21,7 @@ const port = 4000;
 
 const userRouter = require('./Routes/userRouter');
 const adminRouter = require('./Routes/adminRouter');
-const stateRouter = require('./Routes/stateRouter'); // Ensure this is the correct path
+// const stateRouter = require('./Routes/stateRouter'); // Ensure this is the correct path
 const volunteerRouter = require('./Routes/volunteerRouter');
 const authRouter = require('./Routes/Router');
 
@@ -29,7 +29,7 @@ db();
 
 
 app.get('/', (req, res) => { res.send('Loaded'); });
-app.use('/state', stateRouter);
+// app.use('/state', stateRouter);
 app.use('/admin', adminRouter);
 app.use('/volunteer', volunteerRouter);
 app.use('/auth', authRouter);
