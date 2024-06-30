@@ -62,6 +62,31 @@ const agentparam = {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+exports.recipientSignup = async (req, res) => {
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  
+      // Create Auth entry
+      const auth = await authModel.create({
+        email: req.body.email,
+        password: hashedPassword,
+        usertype: req.body.usertype,
+      });
+  
+      // Create Recipient entry
+      const recipient = await recipientModel.create({
+        recipientname: req.body.recipientname,
+        contact: req.body.contact,
+        address: req.body.address,
+        authid: auth._id,
+      });
+  
+      res.json('success');
+    } catch (error) {
+      console.error('Error Occurred:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
 
 exports.signin = async (req, res) => {
     try {

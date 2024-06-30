@@ -895,6 +895,11 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.background3{
+  background: url("../img/donor.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 
 .glassmorphic {
