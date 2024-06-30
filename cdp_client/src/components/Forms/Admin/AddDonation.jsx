@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Sidebar from '../common/Sidebar';
+import Sidebar from '../../common/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
 function AddDonation() {
@@ -156,7 +156,7 @@ function AddDonation() {
                         name="image"
                         onChange={(event) => setImage(event.target.files[0])}
                       />
-                      <label htmlFor="donationImageInput">Donation Image</label>
+                      {/* <label htmlFor="donationImageInput">Donation Image</label> */}
                       {errors.image && <small className="text-danger">{errors.image}</small>}
                     </div>
   

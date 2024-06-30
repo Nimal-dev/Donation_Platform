@@ -10,7 +10,7 @@ function DeliveryboyList() {
     fetch("http://localhost:4000/admin/viewvolunteer")
       .then((res) => res.json())
       .then((result) => {
-        console.log(result,"aserdtfgh");
+        console.log(result, "aserdtfgh");
         setVolunteer(result);
       })
       .catch((error) => {
@@ -36,51 +36,60 @@ function DeliveryboyList() {
         console.error("Error deleting state:", error);
       });
   };
+
   return (
-    <>
-      <div class="col-sm-12 col-xl-6">
-        <div class="bg-secondary rounded h-100 p-4">
+    <div className="col-sm-12 col-xl-6">
+      <div className="bg-secondary rounded h-100 p-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h6 class="mb-4">DELIVERY PERSON LIST</h6>
-          <Link className="btn btn-primary" to="/AddVolunteer">ADD DELIVERY PERSON</Link>
-          </div>
-          <table class="table table-hover">
-            <thead>
+          <h6 className="mb-4">DELIVERY AGENTS</h6>
+          <Link className="btn btn-primary" to="/AddVolunteer">
+            ADD DELIVERY PERSON
+          </Link>
+        </div>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {volunteer.length === 0 ? (
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Contact</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-            {volunteer.map((volunteer, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{volunteer.volunteername}</td>
-                <td>{volunteer.authid.email}</td>
-                <td>{volunteer.contact}</td>
-                {/* <td>{volunteer.location}</td> */}
-                <td>
-                  <Link to="/EditVolunteer" state={{ id: volunteer._id }}>
-                    <button className="btn btn-success" style={{padding:"5px 20px"}}>Edit</button>
-                  </Link>
-                  <button
-                    className="btn btn-danger ms-1" style={{padding:"5px 20px"}}
-                    onClick={() => deleteVolunteer(volunteer._id)}
-                  >
-                    Delete
-                  </button>
+                <td colSpan="5" className="text-center">
+                  No Delivery Agents are registered.
                 </td>
               </tr>
-            ))}
+            ) : (
+              volunteer.map((volunteer, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{volunteer.volunteername}</td>
+                  <td>{volunteer.authid.email}</td>
+                  <td>{volunteer.contact}</td>
+                  <td>
+                    <Link to="/EditVolunteer" state={{ id: volunteer._id }}>
+                      <button className="btn btn-success" style={{ padding: "5px 20px" }}>
+                        Edit
+                      </button>
+                    </Link>
+                    <button
+                      className="btn btn-danger ms-1" style={{ padding: "5px 20px" }}
+                      onClick={() => deleteVolunteer(volunteer._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
-          </table>
-        </div>
+        </table>
       </div>
-      
-    </>
+    </div>
   );
 }
 

@@ -92,7 +92,7 @@ function Sidebar() {
 
               <NavLink
                 exact
-                to="/"
+                to="/AdminHome"
                 className="nav-item nav-link"
                 activeClassName="active"
               >

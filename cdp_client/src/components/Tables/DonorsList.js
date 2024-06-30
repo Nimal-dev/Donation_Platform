@@ -57,26 +57,35 @@ function DonorsList() {
             </tr>
           </thead>
           <tbody>
-            {state.map((state, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{state.statename}</td>
-                <td>{state.contact}</td>
-                {/* <td>{state.location}</td> */}
-                <td>{state.authid.email}</td>
-                <td>
-                  <Link to="/EditState" state={{ id: state._id }}>
-                    <button className="btn btn-success" style={{padding:"5px 20px"}}>Edit</button>
-                  </Link>
-                  <button
-                    className="btn btn-danger ms-1"style={{padding:"5px 20px"}}
-                    onClick={() => deleteState(state._id)}
-                  >
-                    Delete
-                  </button>
+            {state.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center">
+                  No Donors are registered.
                 </td>
               </tr>
-            ))}
+            ) : (
+              state.map((state, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{state.statename}</td>
+                  <td>{state.contact}</td>
+                  <td>{state.authid.email}</td>
+                  <td>
+                    <Link to="/EditState" state={{ id: state._id }}>
+                      <button className="btn btn-success" style={{ padding: "5px 20px" }}>
+                        Edit
+                      </button>
+                    </Link>
+                    <button
+                      className="btn btn-danger ms-1" style={{ padding: "5px 20px" }}
+                      onClick={() => deleteState(state._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

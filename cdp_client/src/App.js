@@ -5,13 +5,14 @@ import Signup from "./components/Auth/SignUp";
 import AdminHome from "./components/HomePage/adminHome";
 import VolunteerHome from "./components/HomePage/deliveryHome";
 import UserHome from "./components/HomePage/userHome";
-import AddDonationCategory from "./components/Forms/Admin/AddDonationCategory";
+
 import LandingPage from "./components/HomePage/LandingPage";
 import FullDonationsSection from "./components/LandingPageComponents/FullDonationsSection";
 import MyDonationsPage from "./components/LandingPageComponents/MyDonationsPage";
-import AddDonation from "./components/Forms/AddDonation";
+import AddDonation from "./components/Forms/Admin/AddDonation";
 import RecipientHome from "./components/HomePage/RecipientHome";
 import RecipientSignUp from "./components/Auth/RecipientSignUp";
+import DonationCategories from "./components/Tables/DonationCategories";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
 {/* -------------------------------------Admin Page Routes----------------------------- */}
 
     
-      <Route path="/DonationCategories" element={<AddDonationCategory/>} />
+      <Route path="/DonationCategories" element={<DonationCategories/>} />
       <Route path="/Donations" element={<FullDonationsSection/>} />
       <Route path="/MyDonations" element={<MyDonationsPage/>} />
       <Route path="/AddDonation" element={<AddDonation/>} />

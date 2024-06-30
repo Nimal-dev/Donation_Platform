@@ -41,7 +41,7 @@ function Signup() {
 useEffect(() => {
     if (message === 'Registered successfully') {
       setTimeout(() => {
-        navigate('/'); // Redirect to the home page after 2 seconds
+        navigate('/SignIn'); // Redirect to the home page after 2 seconds
       }, 2000);
     }
   }, [message, navigate]);
@@ -49,13 +49,14 @@ useEffect(() => {
 
 
   return (
+    <div className="background1">
     <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style={{minHeight: '100vh'}}>
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
-                    <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="glassmorphic rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="index.html" class="">
-                                <h3 class="text-primary">Donation Platfrom</h3>
+                                <h3 class="text-primarys">Donation Platfrom</h3>
                             </a>
                             <h3>REGISTER NOW!</h3>
                         </div>
@@ -102,14 +103,22 @@ useEffect(() => {
                             onChange={(e) => setPassword(e.target.value)} />
                             <label for="floatingPassword">Password</label>
                         </div>
-                        <button type="butoon" class="btn btn-primary py-3 w-100 mb-4"
+
+
+                        {/* -----------Custom Button Start ------------- */}
+              <button type="button" className="glow-on-hover w-100 mb-4" onClick={registerUser}>
+                Register <i className="fa fa-user-plus" aria-hidden="true"></i>
+              </button>
+              {/* --------------------Custom Button End ------------------ */}
+                        {/* <button type="butoon" class="btn btn-primary py-3 w-100 mb-4"
                         onClick={registerUser}
                         
-                        >Sign Up</button>
-                        <p class="text-center mb-0">Already have an Account? <a href="/">Sign In</a></p>
+                        >Sign Up</button> */}
+                        <p class="text-center mb-0">Already have an Account? <a href="/SignIn">Sign In</a></p>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
   );
 }

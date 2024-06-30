@@ -83,7 +83,7 @@ h6,
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   line-height: 1.2;
-  color: #fff;
+  color: #000000;
 }
 h1,
 .h1 {
@@ -1819,7 +1819,7 @@ progress {
   font-weight: 400;
   line-height: 1.5;
   color: #6c7293;
-  background-color: #000;
+  background-color: #ffffff;
   background-clip: padding-box;
   border: 1px solid #000;
   appearance: none;
@@ -1838,8 +1838,8 @@ progress {
   cursor: pointer;
 }
 .form-control:focus {
-  color: #6c7293;
-  background-color: #000;
+  color: #000000;
+  background-color: #ffffff;
   border-color: #f58b8b;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(235, 22, 22, 0.25);
@@ -1853,7 +1853,7 @@ progress {
 }
 .form-control:disabled,
 .form-control:read-only {
-  background-color: #000;
+  background-color: #ffffff;
   opacity: 1;
 }
 .form-control::file-selector-button {
@@ -1884,7 +1884,7 @@ progress {
   margin: -0.375rem -0.75rem;
   margin-inline-end: 0.75rem;
   color: #6c7293;
-  background-color: #000;
+  background-color: #ffffff;
   pointer-events: none;
   border-color: inherit;
   border-style: solid;
@@ -2232,7 +2232,7 @@ textarea.form-control-lg {
 }
 .form-floating > .form-control:focus,
 .form-floating > .form-control:not(:placeholder-shown) {
-  padding-top: 1.625rem;
+  /* padding-top: 1.625rem; */
   padding-bottom: 0.625rem;
 }
 .form-floating > .form-control:-webkit-autofill {
@@ -6889,7 +6889,7 @@ fieldset:disabled .btn {
   background-color: #eb1616 !important;
 }
 .bg-secondary {
-  background-color: #191c24 !important;
+  background-color: #D7D7D7 !important;
 }
 .bg-success {
   background-color: #198754 !important;

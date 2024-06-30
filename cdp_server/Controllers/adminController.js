@@ -33,7 +33,7 @@ const upload = multer({ storage: storage }).single('image');
 
 
 // ------------------------------------------------------State Controller----------------------------------------------//
-exports.addState = async (req, res) => {
+exports.AddDonor = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const loginparam = {

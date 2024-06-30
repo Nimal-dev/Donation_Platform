@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../../common/Sidebar";
 import { useNavigate } from "react-router-dom";
 
-function AddState() {
+function AddDonor() {
   const [statename, setStatename] = useState("");
   const [contact, setContact] = useState("");
   const [location, setLocation] = useState("");
@@ -23,7 +23,7 @@ function AddState() {
       password: password,
       usertype: 1,
     };
-    fetch("http://localhost:4000/admin/AddState", {
+    fetch("http://localhost:4000/admin/AddDonor", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -173,4 +173,4 @@ function AddState() {
   );
 }
 
-export default AddState;
+export default AddDonor;

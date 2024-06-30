@@ -1,9 +1,9 @@
 /********** Template CSS **********/
 :root {
     --primary: #EB1616;
-    --secondary: #191C24;
+    --secondary: #D7D7D7;
     --light: #6C7293;
-    --dark: #000000;
+    --dark: #E6E6E6;
 }
 
 .back-to-top {
@@ -21,14 +21,9 @@ body {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   line-height: 28px;
-  color: #ffffff;
+  color: #000000;
   font-size: 14px;
-  background-color: #eff2f1;;
-/* background-image: url('https://img.freepik.com/free-vector/stylish-white-background-with-diagonal-lines_1017-33199.jpg?w=1060&t=st=1717995854~exp=1717996454~hmac=4b59a4c4f0cdb5d3bf015eea378577594251e9d33550035bc89638db7f0d0fef'); 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center; */
+  background-color: #eff2f1;
 }
 
 

@@ -16,7 +16,7 @@ function DonationList() {
         <div className="row">
           <div className="col-md-12 col-lg-3 mb-5 mb-lg-0">
             <h2 className="mb-4 section-title">Every Donation Matters</h2>
-            <p className="mb-4">
+            <p className="mb-4" style={{color:"black"}}>
               Your donations play a vital role in fueling our mission and
               enabling us to contribute to the cause, such as providing
               essential services, funding research, supporting communities, etc.

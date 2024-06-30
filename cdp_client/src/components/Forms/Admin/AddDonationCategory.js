@@ -40,9 +40,8 @@ function AddDonationCategory() {
   };
   return (
     <>
-    <Sidebar/>
-    <div className="content">
-        <div className="container-fluid">
+    {/* <div className="content">
+        <div className="container-fluid"> */}
           <div
             className="row h-100 align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
@@ -122,8 +121,8 @@ function AddDonationCategory() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
 
     </>
   )

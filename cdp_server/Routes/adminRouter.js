@@ -3,7 +3,7 @@ const router = express.Router();
 const adminController = require('../Controllers/adminController');
 
 // Define your routes here
-router.post('/AddState', adminController.addState);
+router.post('/AddDonor', adminController.AddDonor);
 router.get('/viewstate', adminController.viewstate);
 router.post('/updateStateById', adminController.UpdateState);
 router.post('/editAndUpdateState', adminController.editAndUpdateState);
