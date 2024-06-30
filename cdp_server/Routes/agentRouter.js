@@ -1,9 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const agentController = require('../Controllers/agentController');
-
+const agentController = require("../Controllers/agentController");
 // Define your routes here
-router.post('/sendresourceRequest', agentController.sendresourceRequest);
-router.get('/getresourceRequest', agentController.getResourceRequest);
+router.get("/getAgentProfile/:id", agentController.getAgentProfile);
 
 module.exports = router;

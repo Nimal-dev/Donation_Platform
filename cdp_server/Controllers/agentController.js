@@ -2,19 +2,22 @@
 const agentmodels = require('../Models/agentModel');
 
 
-// exports.sendresourceRequest = async (req, res) => {
-//     try {
-//         const requestparam = {
-//             userid: req.body.userid,
-//             resourcerequest: req.body.resourcerequest,
-//         };
-//         await agentModel.create(requestparam);
-//         res.json('success');
-//     } catch (error) {
-//         console.error('Error:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// };
+exports.getAgentProfile = async (req, res) => {
+    try {
+        const agentDetails = await agentmodels
+            .findOne({ authid: req.params.id })
+            .populate("authid");
+
+        if (!agentDetails) {
+            return res.status(404).json({ message: "Agent not found" });
+        }
+
+        res.json({ agent: agentDetails });
+    } catch (error) {
+        console.error("Error fetching agent profile:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
 // exports.getResourceRequest = async (req, res) => {
 //     try {

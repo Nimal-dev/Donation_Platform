@@ -1,10 +1,10 @@
 const authmodels = require('../Models/authModel');
 const usermodels = require('../Models/userModel');
-const donormodels = require('../Models/donorModel');
+const recipientModels = require('../Models/recipientModel');
 const agentModels = require('../Models/agentModel');
 const userModel = usermodels.user;
 const authModel = authmodels.auth;
-const donorModel = donormodels.donor;
+const recipientModel = recipientModels.recipient;
 const agentModel = agentModels.agent;
 const bcrypt = require('bcrypt');
 
@@ -76,7 +76,7 @@ exports.signin = async (req, res) => {
             if (isPasswordValid) {
                 let user;
                 if (authenticate.usertype === 1) { // Donor user
-                    user = await donorModel.findOne({ authid: authenticate._id }).populate('authid');
+                    user = await recipientModel.findOne({ authid: authenticate._id }).populate('authid');
                 } else if(authenticate.usertype === 2){
                     user = await agentModel.findOne({ authid: authenticate._id }).populate('authid');
                 }

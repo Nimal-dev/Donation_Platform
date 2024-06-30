@@ -11,9 +11,9 @@ function Sidebar() {
     if (userdata && userdata._id) {
       setUsertype(userdata.authid.usertype);
       if (userdata.authid.usertype === 1) {
-        setName(userdata.statename); // Set the statename for state user
+        setName(userdata.recipientname); // Set the statename for state user
       } else if (userdata.authid.usertype === 2) {
-        setName(userdata.volunteername);
+        setName(userdata.agentname);
       } else {
         setName(`${userdata.firstname} ${userdata.lastname}`); // Set the fullname for other users
       }
@@ -25,11 +25,11 @@ function Sidebar() {
       case 0:
         return "Admin";
       case 1:
-        return "Donor";
-      case 2:
-        return "Delivery";
-      case 3:
         return "Recipient";
+      case 2:
+        return "Delivery Personnel";
+      case 3:
+        return "User";
       default:
         return "";
     }
@@ -40,9 +40,9 @@ function Sidebar() {
       case 0:
         return "fa-user-secret"; // Admin icon
       case 1:
-        return "fa-building"; // State icon
+        return "fa-users"; // Recipient icon
       case 2:
-        return "fa-hands-helping"; // Volunteer icon
+        return "fa-truck"; // Agent icon
       case 3:
         return "fa-user"; // User icon
       default:
@@ -55,9 +55,9 @@ function Sidebar() {
       case 0:
         return "/AdminHome";
       case 1:
-        return "/DonorHome";
+        return "/RecipientHome";
       case 2:
-        return "/VolunteerHome";
+        return "/DeliveryHome";
       case 3:
         return "/UserHome";
       default:
@@ -144,15 +144,16 @@ function Sidebar() {
               >
                 <i className="fa fa-tachometer-alt me-2"></i>Dashboard
               </NavLink>
-
               <NavLink
                 exact
-                to="/HelpRequests"
+                to="/Donation"
                 className="nav-item nav-link"
                 activeClassName="active"
               >
-                <i className="fa fa-bell me-2"></i>Donation Req
+                <i className="fa fa-credit-card me-2"></i>Donations
               </NavLink>
+
+              
 
               {/* <NavLink
                 exact
@@ -175,14 +176,7 @@ function Sidebar() {
                 <i className="fa fa-tachometer-alt me-2"></i>Dashboard
               </NavLink>
 
-              <NavLink
-                exact
-                to="/HelpRequests"
-                className="nav-item nav-link"
-                activeClassName="active"
-              >
-                <i className="fa fa-bell me-2"></i>Help Requests
-              </NavLink>
+              
             </>
           )}
           {usertype === 3 && (

@@ -3,9 +3,10 @@ import React from 'react';
 import Sidebar from '../common/Sidebar';
 import Navbar from '../common/Navbar';
 import UsersList from '../Tables/UsersList';
-import DonorsList from '../Tables/DonorsList';
+import DonorsList from '../Tables/RecipientList';
 import DeliveryboyList from '../Tables/Admin/DeliveryboyList';
 import CategoriesList from '../Tables/Admin/CategoriesList';
+import RecipientList from '../Tables/RecipientList';
 
 function AdminHome() {
   return (
@@ -16,7 +17,7 @@ function AdminHome() {
         
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
-            <DonorsList />
+            <RecipientList />
             <CategoriesList />
             <DeliveryboyList />
             <UsersList />

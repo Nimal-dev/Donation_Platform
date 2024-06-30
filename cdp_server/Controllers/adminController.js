@@ -1,15 +1,15 @@
 const authmodels = require('../Models/authModel');
-const donormodels = require('../Models/donorModel');
+const recipientmodels = require('../Models/recipientModel');
 const agentModels = require('../Models/agentModel');
-const recipientmodels = require('../Models/userModel');
+const usermodels = require('../Models/userModel');
 const categorymodels = require('../Models/categoryModel');
 const DonationModels = require('../Models/DonationModel')
 const bcrypt = require('bcrypt');
 
 const authModel = authmodels.auth;
-const donorModel = donormodels.donor;
+const recipientModel = recipientmodels.recipient;
 const agentModel = agentModels.agent;
-const recipientmodel = recipientmodels.user;
+const recipientmodel = usermodels.user;
 const categorymodel = categorymodels.category;
 
 const DonationModel = DonationModels.donation;
@@ -32,8 +32,8 @@ const upload = multer({ storage: storage }).single('image');
 
 
 
-// ------------------------------------------------------Donor Controller----------------------------------------------//
-exports.AddDonor = async (req, res) => {
+// ------------------------------------------------------Recipient Controller----------------------------------------------//
+exports.AddRecipient = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const loginparam = {
@@ -43,14 +43,14 @@ exports.AddDonor = async (req, res) => {
         };
         const auth = await authModel.create(loginparam);
 
-        const donorparam = {    
-            donorname: req.body.donorname,
+        const recipientparam = {    
+            recipientname: req.body.recipientname,
             contact: req.body.contact,
             location: req.body.location,
             address: req.body.address,
             authid: auth._id
         };
-        await donorModel.create(donorparam);
+        await recipientModel.create(recipientparam);
         res.json('success');
     } catch (error) {
         console.error('Error:', error);
@@ -58,42 +58,42 @@ exports.AddDonor = async (req, res) => {
     }
 };
 
-exports.viewdonor = async (req, res) => {
+exports.viewrecipient = async (req, res) => {
     try {
-        const donors = await donorModel.find().populate('authid');
-        res.json(donors);
+        const recipient = await recipientModel.find().populate('authid');
+        res.json(recipient);
     } catch (error) {
-        console.error('Error fetching donor:', error);
+        console.error('Error fetching recipient:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-exports.UpdateDonor = async (req, res) => {
+exports.UpdateRecipient = async (req, res) => {
     try {
-        const donorDetails = await donorModel.findById(req.body.id).populate('authid');
-        if (!donorDetails) {
-            return res.status(404).json({ error: 'donor not found' });
+        const recipientDetails = await recipientModel.findById(req.body.id).populate('authid');
+        if (!recipientDetails) {
+            return res.status(404).json({ error: 'Recipient not found' });
         }
 
         res.json({
-            donorDetails,
-            authDetails: donorDetails.authid
+            recipientDetails,
+            authDetails: recipientDetails.authid
         });
     } catch (error) {
-        console.error("Error in fetching donor details:", error);
-        res.status(500).json({ error: "An error occurred while fetching the donor details" });
+        console.error("Error in fetching recipient details:", error);
+        res.status(500).json({ error: "An error occurred while fetching the recipient details" });
     }
 };
 
-exports.editAndUpdateDonor = async (req, res) => {
+exports.editAndUpdaterecipient = async (req, res) => {
     try {
-        const donorDetails = {
-            donorname: req.body.donorname,
+        const recipientDetails = {
+            recipientname: req.body.recipientname,
             contact: req.body.contact,
             location: req.body.location,
             address: req.body.address,
         };
-        await donorModel.findByIdAndUpdate(req.body.id, donorDetails);
+        await recipientModel.findByIdAndUpdate(req.body.id, recipientDetails);
 
         const loginDetails = {
             email: req.body.email,
@@ -103,30 +103,30 @@ exports.editAndUpdateDonor = async (req, res) => {
 
         res.json("updated");
     } catch (error) {
-        console.error("Error in updating donor:", error);
-        res.status(500).json({ error: "An error occurred while updating the donor" });
+        console.error("Error in updating Recipient:", error);
+        res.status(500).json({ error: "An error occurred while updating the Recipient" });
     }
 };
 
-exports.deleteDonor = async (req, res) => {
+exports.deleteRecipient = async (req, res) => {
     try {
-        const donorId = req.body.id;
-        const donor = await donorModel.findById(donorId);
+        const recipientId = req.body.id;
+        const recipient = await recipientModel.findById(recipientId);
 
-        if (!donor) {
-            return res.status(404).json({ error: 'donor not found' });
+        if (!recipient) {
+            return res.status(404).json({ error: 'recipient not found' });
         }
 
         // Delete associated auth details
-        await authModel.findByIdAndDelete(donor.authid);
+        await authModel.findByIdAndDelete(recipient.authid);
 
-        // Delete the donor
-        await donorModel.findByIdAndDelete(donorId);
+        // Delete the recipient
+        await recipientModel.findByIdAndDelete(recipientId);
 
-        res.json({ message: 'Donor and associated auth details deleted successfully' });
+        res.json({ message: 'Recipient and associated auth details deleted successfully' });
     } catch (error) {
-        console.error("Error in deleting donor:", error);
-        res.status(500).json({ error: "An error occurred while deleting the donor" });
+        console.error("Error in deleting recipient:", error);
+        res.status(500).json({ error: "An error occurred while deleting the recipient" });
     }
 };
 
@@ -229,7 +229,7 @@ exports.UpdateAgent = async (req, res) => {
         });
     } catch (error) {
         console.error("Error in fetching agent details:", error);
-        res.status(500).json({ error: "An error occurred while fetching the donor details" });
+        res.status(500).json({ error: "An error occurred while fetching the recipient details" });
     }
 };
 // -----------------------------------------------------------------------------//
@@ -317,7 +317,7 @@ exports.AddDonation = (req, res) => {
   
       try {
         const { donationName, donationDescription, donationPrice } = req.body;
-        const donorId = req._id;
+        const recipientId = req._id;
   
         if (!req.file) {
           return res.status(400).json({ error: 'Image is required' });
@@ -330,7 +330,7 @@ exports.AddDonation = (req, res) => {
           donationDescription,
           donationPrice,
           imageUrl,
-          donorId,
+          recipientId,
         };
   
         await DonationModel.create(donationParam);

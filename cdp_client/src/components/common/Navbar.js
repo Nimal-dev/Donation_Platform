@@ -8,17 +8,16 @@ function Navbar() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [usertype, setUsertype] = useState(null);
-  const [notifications, setNotifications] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(0);
+
 
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem('userdata'));
     if (userdata && userdata._id) {
       setUsertype(userdata.authid.usertype);
       if (userdata.authid.usertype === 1) {
-        setName(userdata.statename);
+        setName(userdata.recipientname);
       } else if (userdata.authid.usertype === 2) {
-        setName(userdata.volunteername);
+        setName(userdata.agentname);
       } else {
         setName(`${userdata.firstname} ${userdata.lastname}`);
       }
@@ -65,7 +64,7 @@ function Navbar() {
   
     toast.success('Logged out successfully!', {
       position: "top-right",
-      autoClose: 3000,
+      autoClose: 1000,
     });
   
     setTimeout(() => {

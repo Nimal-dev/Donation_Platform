@@ -890,13 +890,18 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.background2{
+  background: url("../img/deliveryagent.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 
 .glassmorphic {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }

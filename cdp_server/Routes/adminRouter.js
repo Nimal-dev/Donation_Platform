@@ -3,11 +3,11 @@ const router = express.Router();
 const adminController = require('../Controllers/adminController');
 
 // Define your routes here
-router.post('/AddDonor', adminController.AddDonor);
-router.get('/viewdonor', adminController.viewdonor);
-router.post('/updateDonorById', adminController.UpdateDonor);
-router.post('/editAndUpdateDonor', adminController.editAndUpdateDonor);
-router.post('/deleteDonor', adminController.deleteDonor);
+router.post('/AddRecipient', adminController.AddRecipient);
+router.get('/viewRecipient', adminController.viewrecipient);
+router.post('/updateRecipientById', adminController.UpdateRecipient);
+router.post('/editAndUpdateRecipient', adminController.editAndUpdaterecipient);
+router.post('/deleteRecipient', adminController.deleteRecipient);
 
 
 

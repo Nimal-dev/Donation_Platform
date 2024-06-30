@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../../common/Sidebar";
 
-function EditDonor() {
-  const [donorname, setDonorName] = useState("");
+function EditRecipient() {
+  const [recipientname, setRecipientName] = useState("");
   const [contact, setContact] = useState("");
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
@@ -15,7 +15,7 @@ function EditDonor() {
 
   useEffect(() => {
     const ids = { id: loc.state.id };
-    fetch("http://localhost:4000/admin/updateDonorById", {
+    fetch("http://localhost:4000/admin/updateRecipientById", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -25,10 +25,10 @@ function EditDonor() {
     })
       .then((res) => res.json())
       .then((result) => {
-        setDonorName(result.donorDetails.donorname);
-        setLocation(result.donorDetails.location);
-        setContact(result.donorDetails.contact);
-        setAddress(result.donorDetails.address);
+        setRecipientName(result.recipientDetails.recipientname);
+        setLocation(result.recipientDetails.location);
+        setContact(result.recipientDetails.contact);
+        setAddress(result.recipientDetails.address);
         setEmail(result.authDetails.email);
         setAuthid(result.authDetails._id); // Store auth ID for update
       });
@@ -37,7 +37,7 @@ function EditDonor() {
   const updateDonor = () => {
     const params = {
       id: loc.state.id,
-      donorname: donorname,
+      recipientname: recipientname,
       contact: contact,
       location: location,
       address: address,
@@ -45,7 +45,7 @@ function EditDonor() {
       userstatus: 3,
       authid: authid // Pass auth ID for update
     };
-    fetch("http://localhost:4000/admin/editAndUpdateDonor", {
+    fetch("http://localhost:4000/admin/editAndUpdateRecipient", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -71,7 +71,7 @@ function EditDonor() {
             <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
               <div className="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                 <div className="d-flex align-items-center justify-content-center mb-3">
-                  <h3>Update Donor Committee</h3>
+                  <h3>UPDATE RECIPIENT</h3>
                 </div>
                 <div>
                   <div className="form-floating mb-3">
@@ -80,10 +80,10 @@ function EditDonor() {
                       className="form-control"
                       id="donorNameInput"
                       placeholder="Kerala Disaster management"
-                      value={donorname}
-                      onChange={(event) => setDonorName(event.target.value)}
+                      value={recipientname}
+                      onChange={(event) => setRecipientName(event.target.value)}
                     />
-                    <label htmlFor="donorNameInput">Donor Committee Name</label>
+                    <label htmlFor="donorNameInput">Recipient Name</label>
                   </div>
                   <div className="form-floating mb-3">
                     <input
@@ -148,4 +148,4 @@ function EditDonor() {
   );
 }
 
-export default EditDonor;
+export default EditRecipient;

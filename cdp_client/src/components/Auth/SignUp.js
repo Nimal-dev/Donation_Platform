@@ -1,125 +1,188 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
-    const [firstname, setFirstName] = useState('')
-    const [lastname, setLastName] = useState('')
-    const [contact, setContact] = useState('')
-    const [address, setAddress] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('');
-    const navigate = useNavigate(); 
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [contact, setContact] = useState('');
+  const [address, setAddress] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-   const registerUser =()=>{
-    let params = {
-        firstname:firstname,
-        lastname:lastname,
-        contact:contact,
-        address:address,
-        email:email,
-        password:password,
-        usertype: 3 
+  const validate = () => {
+    const newErrors = {};
+    if (!firstname) newErrors.firstname = 'First name is required';
+    if (!lastname) newErrors.lastname = 'Last name is required';
+    if (!contact) newErrors.contact = 'Contact is required';
+    if (!address) newErrors.address = 'Address is required';
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid';
     }
-    fetch("http://localhost:4000/auth/signup",{
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept:'applizcation/json'
-    },
-    body: JSON.stringify(params)
-    }).then((res)=>res.json()).then((result)=>{
-        if (result === 'success') {
-            setMessage('Registered successfully');
-          } else {
-            setMessage('Registration failed');
-          }
-        console.log(result);
-   });
-};
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-useEffect(() => {
-    if (message === 'Registered successfully') {
+  const registerUser = () => {
+    if (!validate()) return;
+
+    const params = {
+      firstname,
+      lastname,
+      contact,
+      address,
+      email,
+      password,
+      usertype: 3,
+    };
+
+    fetch("http://localhost:4000/auth/signup", {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(params),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result === 'success') {
+          toast.success('Registered successfully!', {
+            position: 'top-right',
+            autoClose: 2000,
+          });
+          setTimeout(() => {
+            navigate('/SignIn');
+          }, 2000);
+        } else {
+          toast.error('Registration failed!', {
+            position: 'top-right',
+            autoClose: 2000,
+          });
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (errors.message === 'Registered successfully') {
       setTimeout(() => {
-        navigate('/SignIn'); // Redirect to the home page after 2 seconds
+        navigate('/SignIn');
       }, 2000);
     }
-  }, [message, navigate]);
-
-
+  }, [errors, navigate]);
 
   return (
     <div className="background1">
-    <div class="container-fluid">
-            <div class="row h-100 align-items-center justify-content-center" style={{minHeight: '100vh'}}>
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
-                    <div class="glassmorphic rounded p-4 p-sm-5 my-4 mx-3">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primarys">Donation Platfrom</h3>
-                            </a>
-                            <h3>REGISTER NOW!</h3>
-                        </div>
-                        {message && <div className="alert alert-info">{message}</div>} {/* Display message */}
-                        
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingText" placeholder="First Name"
-                            onChange={(e) => setFirstName(e.target.value)} />
-                            <label for="floatingText">First Name</label>
-                        </div>
+      <div className="container-fluid">
+        <div className="row h-100 align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+          <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
+            <div className="glassmorphic rounded p-4 p-sm-5 my-4 mx-3">
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                <h3 className="text-primarys">Donation Platform</h3>
+                <h3>REGISTER NOW!</h3>
+              </div>
+              <ToastContainer />
 
-                        <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingText" placeholder="Last Name"
-                        onChange={(e) => setLastName(e.target.value)} />
-                            <label for="floatingText">Last Name</label>
-                        </div>
+              <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingFirstName"
+                  placeholder="First Name"
+                  value={firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+                <label htmlFor="floatingFirstName">First Name</label>
+                {errors.firstname && <small className="text-danger">{errors.firstname}</small>}
+              </div>
 
-                        <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="floatingText" placeholder="Phone Number"
-                        onChange={(e) => setContact(e.target.value)} />
-                            <label for="floatingText">Contact</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                    <textarea
-                      class="form-control"
-                      placeholder="Enter Volunteer Address"
-                      id="floatingTextarea"
-                      name="address"
-                      style={{height: "100px"}}
-                      onChange={(event) => setAddress(event.target.value)}
-                    ></textarea>
-                    <label for="floatingTextarea">Address</label>
-                    
-                  </div>
-                       
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            onChange={(e) => setEmail(e.target.value)} />
-                            <label for="floatingInput">Email address</label>
-                        </div>
+              <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingLastName"
+                  placeholder="Last Name"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                <label htmlFor="floatingLastName">Last Name</label>
+                {errors.lastname && <small className="text-danger">{errors.lastname}</small>}
+              </div>
 
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                            onChange={(e) => setPassword(e.target.value)} />
-                            <label for="floatingPassword">Password</label>
-                        </div>
+              <div className="form-floating mb-3">
+                <input
+                  type="number"
+                  className="form-control"
+                  id="floatingContact"
+                  placeholder="Phone Number"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                />
+                <label htmlFor="floatingContact">Contact</label>
+                {errors.contact && <small className="text-danger">{errors.contact}</small>}
+              </div>
 
+              <div className="form-floating mb-3">
+                <textarea
+                  className="form-control"
+                  placeholder="Enter Address"
+                  id="floatingAddress"
+                  style={{ height: '100px' }}
+                  value={address}
+                  onChange={(event) => setAddress(event.target.value)}
+                ></textarea>
+                <label htmlFor="floatingAddress">Address</label>
+                {errors.address && <small className="text-danger">{errors.address}</small>}
+              </div>
 
-                        {/* -----------Custom Button Start ------------- */}
+              <div className="form-floating mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="floatingEmail"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <label htmlFor="floatingEmail">Email address</label>
+                {errors.email && <small className="text-danger">{errors.email}</small>}
+              </div>
+
+              <div className="form-floating mb-4">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="floatingPassword"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <label htmlFor="floatingPassword">Password</label>
+                {errors.password && <small className="text-danger">{errors.password}</small>}
+              </div>
+
               <button type="button" className="glow-on-hover w-100 mb-4" onClick={registerUser}>
                 Register <i className="fa fa-user-plus" aria-hidden="true"></i>
               </button>
-              {/* --------------------Custom Button End ------------------ */}
-                        {/* <button type="butoon" class="btn btn-primary py-3 w-100 mb-4"
-                        onClick={registerUser}
-                        
-                        >Sign Up</button> */}
-                        <p class="text-center mb-0">Already have an Account? <a href="/SignIn">Sign In</a></p>
-                    </div>
-                </div>
+
+              <p className="text-center mb-0">
+                Already have an Account? <a href="/SignIn">Sign In</a>
+              </p>
             </div>
+          </div>
         </div>
-        </div>
+      </div>
+    </div>
   );
 }
 

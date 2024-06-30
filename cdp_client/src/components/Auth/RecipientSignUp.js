@@ -19,7 +19,7 @@ function RecipientSignUp() {
         address:address,
         email:email,
         password:password,
-        usertype: 3 
+        usertype: 1 
     }
     fetch("http://localhost:4000/auth/signup",{
         method: 'post',
@@ -46,6 +46,7 @@ useEffect(() => {
     }
   }, [message, navigate]);
   return (
+    
     <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style={{minHeight: '100vh'}}>
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
@@ -108,6 +109,7 @@ useEffect(() => {
                 </div>
             </div>
         </div>
+        
   )
 }
 

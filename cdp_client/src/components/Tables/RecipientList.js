@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function DonorsList() {
-  const [donor, setDonor] = useState([]);
+function RecipientList() {
+  const [recipient, setRecipient] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:4000/admin/viewdonor")
+    fetch("http://localhost:4000/admin/viewRecipient")
       .then((res) => res.json())
       .then((result) => {
-        setDonor(result);
+        setRecipient(result);
       })
       .catch((error) => {
-        console.error("Error fetching donor:", error);
+        console.error("Error fetching recipient:", error);
       });
   }, [refresh]);
 
-  const deleteDonor = (id) => {
-    fetch("http://localhost:4000/admin/deleteDonor", {
+  const deleteRecipient = (id) => {
+    fetch("http://localhost:4000/admin/deleteRecipient", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -28,11 +30,18 @@ function DonorsList() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        toast.success('Recipient deleted successfully', {
+          position: "top-right",
+          autoClose: 2000,
+        });
         setRefresh((prev) => prev + 1); // Trigger a refresh
       })
       .catch((error) => {
-        console.error("Error deleting Donor:", error);
+        console.error("Error deleting recipient:", error);
+        toast.error('Failed to delete recipient', {
+          position: "top-right",
+          autoClose: 2000,
+        });
       });
   };
 
@@ -40,9 +49,9 @@ function DonorsList() {
     <div className="col-sm-12 col-xl-6">
       <div className="bg-secondary rounded h-100 p-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h6 className="mb-0">DONORS LIST</h6>
-          <Link className="btn btn-primary" to="/AddDonor">
-            ADD DONORS
+          <h6 className="mb-0">RECIPIENT LIST</h6>
+          <Link className="btn btn-primary" to="/AddRecipient">
+            ADD RECIPIENT
           </Link>
         </div>
         <table className="table table-hover">
@@ -57,28 +66,28 @@ function DonorsList() {
             </tr>
           </thead>
           <tbody>
-            {donor.length === 0 ? (
+            {recipient.length === 0 ? (
               <tr>
                 <td colSpan="5" className="text-center">
-                  No Donors are registered.
+                  No Recipients are registered.
                 </td>
               </tr>
             ) : (
-              donor.map((donor, index) => (
+              recipient.map((recipient, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{donor.donorname}</td>
-                  <td>{donor.contact}</td>
-                  <td>{donor.authid.email}</td>
+                  <td>{recipient.recipientname}</td>
+                  <td>{recipient.contact}</td>
+                  <td>{recipient.authid.email}</td>
                   <td>
-                    <Link to="/EditDonor" state={{ id: donor._id }}>
+                    <Link to="/EditRecipient" state={{ id: recipient._id }}>
                       <button className="btn btn-success" style={{ padding: "5px 20px" }}>
                         Edit
                       </button>
                     </Link>
                     <button
                       className="btn btn-danger ms-1" style={{ padding: "5px 20px" }}
-                      onClick={() => deleteDonor(donor._id)}
+                      onClick={() => deleteRecipient(recipient._id)}
                     >
                       Delete
                     </button>
@@ -89,8 +98,9 @@ function DonorsList() {
           </tbody>
         </table>
       </div>
+      <ToastContainer />
     </div>
   );
 }
 
-export default DonorsList;
+export default RecipientList;

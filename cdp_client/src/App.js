@@ -3,8 +3,8 @@ import './App.css';
 import SigninPage from "./components/Auth/SignIn";
 import Signup from "./components/Auth/SignUp";
 import AdminHome from "./components/HomePage/adminHome";
-import VolunteerHome from "./components/HomePage/deliveryHome";
 import UserHome from "./components/HomePage/userHome";
+import DeliveryHome from "./components/HomePage/deliveryHome";
 
 import LandingPage from "./components/HomePage/LandingPage";
 import FullDonationsSection from "./components/LandingPageComponents/FullDonationsSection";
@@ -12,12 +12,14 @@ import MyDonationsPage from "./components/LandingPageComponents/MyDonationsPage"
 import RecipientHome from "./components/HomePage/RecipientHome";
 import RecipientSignUp from "./components/Auth/RecipientSignUp";
 import DonationCategories from "./components/Tables/Admin/DonationCategories";
-import AddDonor from "./components/Forms/Admin/AddDonor";
-import EditDonor from "./components/Forms/Admin/EditDonor";
+import AddDonor from "./components/Forms/Admin/AddRecipient";
+import EditDonor from "./components/Forms/Admin/EditRecipient";
 import DonationPage from "./components/Tables/Admin/DonationPage";
 import Agents from "./components/Tables/Admin/Agents";
 import AgentSignUp from "./components/Auth/AgentSignUp";
 import EditAgent from "./components/Forms/Admin/EditAgent";
+import AddRecipient from "./components/Forms/Admin/AddRecipient";
+import EditRecipient from "./components/Forms/Admin/EditRecipient";
 
 function App() {
   return (
@@ -39,7 +41,7 @@ function App() {
 {/* -------------------------------------Home Page Routes----------------------------- */}
 
       <Route path="/AdminHome" element={<AdminHome/>}/>
-      <Route path="/VolunteerHome" element={<VolunteerHome/>}/>
+      <Route path="/DeliveryHome" element={<DeliveryHome/>}/>
       <Route path="/UserHome" element={<UserHome/>}/>
       <Route path="/RecipientHome" element={<RecipientHome/>}/>
 
@@ -50,10 +52,14 @@ function App() {
       <Route path="/Donations" element={<FullDonationsSection/>} />
       <Route path="/MyDonations" element={<MyDonationsPage/>} />
       <Route path="/Donation" element={<DonationPage/>} />
-      <Route path="/AddDonor" element={<AddDonor/>} />
-      <Route path="/EditDonor" element={<EditDonor/>} />
+      <Route path="/AddRecipient" element={<AddRecipient/>} />
+      <Route path="/EditRecipient" element={<EditRecipient/>} />
       <Route path="/EditAgent" element={<EditAgent/>} />
       <Route path="/Agents" element={<Agents/>} />
+
+{/* -------------------------------------Delivery Page Routes----------------------------- */}
+
+
 
     </Routes>
     </BrowserRouter>

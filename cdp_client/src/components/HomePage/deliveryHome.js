@@ -1,10 +1,11 @@
 import React from "react";
 import Sidebar from "../common/Sidebar";
 import Navbar from "../common/Navbar";
-import ResourceRequest from "../Forms/Volunteer/ResourceRequest";
+import AddedDonationsList from "../Tables/Delivery_Agent/AddedDonationsList";
+import AgentProfile from "../Tables/Delivery_Agent/AgentProfile";
 
 
-function deliveryHome() {
+function DeliveryHome() {
   return (
     <>
     <Sidebar />
@@ -12,7 +13,10 @@ function deliveryHome() {
       <Navbar />
       <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-          <ResourceRequest/>,
+          <AgentProfile/>,
+          <AddedDonationsList/>,
+          
+         
           {/* <VolunteerList /> */}
         </div>
       </div>
@@ -21,4 +25,4 @@ function deliveryHome() {
   )
 }
 
-export default deliveryHome;
+export default DeliveryHome;

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Sidebar from "../../common/Sidebar";
 import { useNavigate } from "react-router-dom";
 
-function AddDonor() {
-  const [donorname, setDonorName] = useState("");
+function AddRecipient() {
+  const [recipientname, setRecipientName] = useState("");
   const [contact, setContact] = useState("");
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
@@ -16,7 +16,7 @@ function AddDonor() {
   const validateForm = () => {
     let errors = {};
 
-    if (!donorname) errors.donorname = "Donor name is required.";
+    if (!recipientname) errors.recipientname = "Donor name is required.";
     if (!contact) errors.contact = "Contact is required.";
     else if (!/^\d+$/.test(contact)) errors.contact = "Contact must be numeric.";
     if (!location) errors.location = "Location is required.";
@@ -36,7 +36,7 @@ function AddDonor() {
     if (!validateForm()) return;
 
     let params = {
-      donorname,
+      recipientname,
       contact,
       location,
       address,
@@ -45,7 +45,7 @@ function AddDonor() {
       usertype: 1,
     };
 
-    fetch("http://localhost:4000/admin/AddDonor", {
+    fetch("http://localhost:4000/admin/AddRecipient", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -61,9 +61,9 @@ function AddDonor() {
       })
       .then((result) => {
         if (result === 'success') {
-          setMessage("Donor added successfully.");
+          setMessage("Recipient added successfully.");
           setErrors({});
-          setDonorName("");
+          setRecipientName("");
           setContact("");
           setLocation("");
           setAddress("");
@@ -73,12 +73,12 @@ function AddDonor() {
             navigate("/AdminHome");
           }, 2000);
         } else {
-          setMessage("Failed to add Donor. Please try again.");
+          setMessage("Failed to add Recipient. Please try again.");
         }
       })
       .catch((error) => {
-        console.error("Error adding Donor:", error);
-        setMessage("Failed to add Donor. Please try again.");
+        console.error("Error adding Recipient:", error);
+        setMessage("Failed to add Recipient. Please try again.");
       });
   };
 
@@ -94,7 +94,7 @@ function AddDonor() {
             <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
               <div className="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                 <div className="d-flex align-items-center justify-content-center mb-3">
-                  <h3>Add Donor</h3>
+                  <h3>ADD RECIPIENT</h3>
                 </div>
 
                 {/* Success or Error Message */}
@@ -116,14 +116,14 @@ function AddDonor() {
                     <input
                       type="text"
                       className="form-control"
-                      id="donorNameInput"
+                      id="RecipientNameInput"
                       placeholder="Kerala Disaster management"
-                      value={donorname}
-                      onChange={(event) => setDonorName(event.target.value)}
+                      value={recipientname}
+                      onChange={(event) => setRecipientName(event.target.value)}
                     />
-                    <label htmlFor="donorNameInput">Donor Name</label>
+                    <label htmlFor="recipientNameInput">Recipient Name</label>
                     {errors.donorname && (
-                      <div className="text-danger">{errors.donorname}</div>
+                      <div className="text-danger">{errors.recipientname}</div>
                     )}
                   </div>
 
@@ -220,4 +220,4 @@ function AddDonor() {
   );
 }
 
-export default AddDonor;
+export default AddRecipient;

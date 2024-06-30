@@ -56,9 +56,9 @@ function SigninPage() {
           if (userType === 0) {
             path = '/AdminHome';
           } else if (userType === 1) {
-            path = '/DeliveryHome';
-          } else if (userType === 2) {
             path = '/RecipientHome';
+          } else if (userType === 2) {
+            path = '/DeliveryHome';
           } else if (userType === 3) {
             path = '/';
           } else {
@@ -66,6 +66,7 @@ function SigninPage() {
           }
 
           toast.success('Login Successful!', {
+            autoClose: 1000,
             onClose: () => navigate(path),
           });
         } else {
@@ -125,9 +126,9 @@ function SigninPage() {
                 Sign In <i className="fa fa-arrow-right" aria-hidden="true"></i>
               </button>
 
-              <p className="text-center mb-0">New User! <a href="/Signup">Sign Up</a></p><br />
-              <p className="text-center mb-0">Become a Recipient <a href="/RecipientSignup">Sign Up</a></p><br />
-              <p className="text-center mb-0">Become a <a href="/AgentSignup">Delivery Agent</a>!</p>
+              <p className="text-center mb-0"><b>New User!</b> <a href="/Signup">Sign Up</a></p>
+              <p className="text-center mb-0"><b>Become a</b> <a href="/AgentSignup">Delivery Agent</a>!</p>
+              <p className="text-center mb-0"><b>Become a Recipient</b> <a href="/RecipientSignup">Sign Up</a></p>
             </div>
           </div>
         </div>
