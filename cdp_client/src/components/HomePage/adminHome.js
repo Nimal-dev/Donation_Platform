@@ -1,39 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import Widgets from '../common/Widgets';
+// Updated AdminHome.js
+import React from 'react';
 import Sidebar from '../common/Sidebar';
 import Navbar from '../common/Navbar';
 import UsersList from '../Tables/UsersList';
-import DonorsList from '../Tables/DonorsList';
-import DeliveryboyList from '../Tables/DeliveryboyList';
+import DonorsList from '../Tables/RecipientList';
+import DeliveryboyList from '../Tables/Admin/DeliveryboyList';
+import CategoriesList from '../Tables/Admin/CategoriesList';
+import RecipientList from '../Tables/RecipientList';
 
 function AdminHome() {
-  const [usertype, setUsertype] = useState(null);
-
-  useEffect(() => {
-    const userdata = JSON.parse(localStorage.getItem('userdata'));
-    if (userdata && userdata.userid) {
-      setUsertype(userdata.usertype); // Set the usertype from userdata
-    }
-  }, []);
   return (
     <>
       <Sidebar />
-      <div class="content">
+      <div className="content">
         <Navbar />
-        <Widgets />
         
-        <div class="container-fluid pt-4 px-4">
-          <div class="row g-4">
-            <DonorsList/>
+        <div className="container-fluid pt-4 px-4">
+          <div className="row g-4">
+            <RecipientList />
+            <CategoriesList />
             <DeliveryboyList />
             <UsersList />
-            {/* <CategoriesList/> */}
           </div>
         </div>
       </div>
     </>
-
-  )
+  );
 }
 
 export default AdminHome;

@@ -1,11 +1,11 @@
 const authmodels = require('../Models/authModel');
 const usermodels = require('../Models/userModel');
-const statemodels = require('../Models/stateModel');
-const volunteerModels = require('../Models/volunteerModel');
+const recipientModels = require('../Models/recipientModel');
+const agentModels = require('../Models/agentModel');
 const userModel = usermodels.user;
 const authModel = authmodels.auth;
-const stateModel = statemodels.state;
-const volunteerModel = volunteerModels.volunteer;
+const recipientModel = recipientModels.recipient;
+const agentModel = agentModels.agent;
 const bcrypt = require('bcrypt');
 
 // -------------------------------Authentication ------------------------------//
@@ -36,8 +36,8 @@ exports.signup = async (req, res) => {
     }
 }; 
 
-// ----------------------------Volunteer Sign Up----------------------------------//
-exports.volunteerSignup = async (req, res) => {
+// ----------------------------Agent Sign Up----------------------------------//
+exports.agentSignup = async (req, res) => {
     try {
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -48,14 +48,14 @@ exports.volunteerSignup = async (req, res) => {
         };
         const auth = await authModel.create(authparam);
 
-const volunteerparam = {    
-    volunteername: req.body.volunteername,
+const agentparam = {    
+    agentname: req.body.agentname,
     contact: req.body.contact,
     location: req.body.location,
     address: req.body.address,
     authid: auth._id
 };
-        await volunteerModel.create(volunteerparam);
+        await agentModel.create(agentparam);
         res.json('success');
     } catch (error) {
         console.error("Error Occurred:", error);
@@ -75,10 +75,10 @@ exports.signin = async (req, res) => {
             const isPasswordValid = await bcrypt.compare(password, authenticate.password);
             if (isPasswordValid) {
                 let user;
-                if (authenticate.usertype === 1) { // State user
-                    user = await stateModel.findOne({ authid: authenticate._id }).populate('authid');
+                if (authenticate.usertype === 1) { // Donor user
+                    user = await recipientModel.findOne({ authid: authenticate._id }).populate('authid');
                 } else if(authenticate.usertype === 2){
-                    user = await volunteerModel.findOne({ authid: authenticate._id }).populate('authid');
+                    user = await agentModel.findOne({ authid: authenticate._id }).populate('authid');
                 }
                 else {
                      // Admin user

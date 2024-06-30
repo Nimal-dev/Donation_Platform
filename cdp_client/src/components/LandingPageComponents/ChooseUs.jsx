@@ -3,12 +3,12 @@ import React from 'react'
 function ChooseUs() {
   return (
     <>
-    <div class="why-choose-section" style={{backgroundColor:"#FFE3E1"}}>
+    <div class="why-choose-section" id="ourmission" style={{backgroundColor:"#FFE3E1"}}>
 			<div class="container">
 				<div class="row justify-content-between">
 					<div class="col-lg-6">
 						<h2 class="section-title">Our Mission</h2>
-						<p>At Compassion Link, our mission is to alleviate suffering and empower communities through compassionate action, sustainable initiatives, and unwavering dedication to those in need.</p>
+						<p style={{color:"black"}}>At Compassion Link, our mission is to alleviate suffering and empower communities through compassionate action, sustainable initiatives, and unwavering dedication to those in need.</p>
 
 						<div class="row my-5">
 							<div class="col-6 col-md-6">
