@@ -51,6 +51,20 @@ function DonationList() {
                 <h3 className="product-title">{donation.donationName}</h3>
                 <p>{donation.description}</p>
                 <strong className="product-price">${donation.donationPrice.toFixed(2)}</strong>
+                
+                <div className="progress">
+                  <div 
+                    className="progress-bar progress-bar-striped" 
+                    role="progressbar" 
+                    style={{ width: "100px" }}
+                    aria-valuenow="25"
+                    aria-valuemin="0" 
+                    aria-valuemax="100"
+                  >
+                    25%
+                  </div>
+                </div>
+                
                 <span className="icon-cross">
                   <button
                     onClick={() => handleDonateClick(donation._id)}

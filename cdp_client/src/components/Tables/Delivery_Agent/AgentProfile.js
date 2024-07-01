@@ -6,12 +6,15 @@ function AgentProfile() {
     contact: "",
     address: "",
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem("userdata"));
 
     if (userdata && userdata._id) {
-      fetch(`http://localhost:4000/agent/getAgentById/${userdata._id}`)
+      const userId = userdata._id;
+      console.log(userId);
+      fetch(`http://localhost:4000/agent/getAgentProfile/${userId}`)
         .then((res) => res.json())
         .then((result) => {
           if (result && result.agent) {
@@ -20,9 +23,18 @@ function AgentProfile() {
         })
         .catch((error) => {
           console.error("Error fetching agent data:", error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="col-sm-12 col-xl-6">

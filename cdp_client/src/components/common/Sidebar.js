@@ -144,24 +144,13 @@ function Sidebar() {
               >
                 <i className="fa fa-tachometer-alt me-2"></i>Dashboard
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 exact
                 to="/Donation"
                 className="nav-item nav-link"
                 activeClassName="active"
               >
                 <i className="fa fa-credit-card me-2"></i>Donations
-              </NavLink>
-
-              
-
-              {/* <NavLink
-                exact
-                to="/ResourceRequests"
-                className="nav-item nav-link"
-                activeClassName="active"
-              >
-                <i className="fa fa-bell me-2"></i>Resource Requests
               </NavLink> */}
             </>
           )}

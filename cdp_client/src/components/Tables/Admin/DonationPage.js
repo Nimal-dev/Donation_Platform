@@ -59,11 +59,11 @@ function DonationPage() {
   };
   return (
     <>
-      <Sidebar />
-      <div className="content">
-        <Navbar />
-        <div className="container-fluid pt-4 px-4">
-          <div className="row g-4">
+      {/* <Sidebar /> */}
+      {/* <div className="content"> */}
+        {/* <Navbar /> */}
+        {/* <div className="container-fluid pt-4 px-4">
+          <div className="row g-4"> */}
             <AddDonation />
             <div className="col-sm-12 col-xl-12">
               <div className="bg-secondary rounded h-100 p-4">
@@ -118,9 +118,9 @@ function DonationPage() {
                 </table>
               </div>
             </div>
-          </div>
+          {/* </div>
         </div>
-      </div>
+      </div> */}
       <ToastContainer />
     </>
   );

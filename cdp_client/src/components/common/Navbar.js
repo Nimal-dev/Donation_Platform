@@ -69,7 +69,7 @@ function Navbar() {
   
     setTimeout(() => {
       navigate('/');
-    }, 3000);
+    }, 1500);
   };
 
   return (
