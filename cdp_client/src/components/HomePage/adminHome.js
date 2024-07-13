@@ -7,6 +7,7 @@ import DonorsList from '../Tables/RecipientList';
 import DeliveryboyList from '../Tables/Admin/DeliveryboyList';
 import CategoriesList from '../Tables/Admin/CategoriesList';
 import RecipientList from '../Tables/RecipientList';
+import Widgets from '../common/Widgets';
 
 function AdminHome() {
   return (
@@ -14,7 +15,7 @@ function AdminHome() {
       <Sidebar />
       <div className="content">
         <Navbar />
-        
+<Widgets/>        
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <RecipientList />
