@@ -15,7 +15,7 @@ function AdminHome() {
       <Sidebar />
       <div className="content">
         <Navbar />
-<Widgets/>        
+<Widgets/>         
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <RecipientList />
